@@ -1,0 +1,44 @@
+export default class TestService {
+    _races = [
+        {
+            "index": "dragonborn",
+            "name": "Dragonborn",
+        },
+        {
+            "index": "dwarf",
+            "name": "Dwarf",
+        },
+        {
+            "index": "elf",
+            "name": "Elf",
+        },
+        {
+            "index": "gnome",
+            "name": "Gnome",
+        },
+        {
+            "index": "half-elf",
+            "name": "Half-Elf",
+        },
+        {
+            "index": "half-orc",
+            "name": "Half-Orc",
+        },
+        {
+            "index": "halfling",
+            "name": "Halfling",
+        },
+        {
+            "index": "human",
+            "name": "Human",
+        },
+        {
+            "index": "tiefling",
+            "name": "Tiefling",
+        }
+    ];
+
+    getRaces = async () => {
+        return this._races;
+    };
+}
