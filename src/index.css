@@ -1,0 +1,7 @@
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto Serif', sans-serif;
+    background: url("/src/img/Background.jpg") center/cover no-repeat;
+}

@@ -10,6 +10,7 @@ import {Service} from "./components/service-context/service-context";
 
 import {App} from "./components/app/app";
 
+import "normalize.css";
 import "./index.css";
 
 const service = new TestService();
