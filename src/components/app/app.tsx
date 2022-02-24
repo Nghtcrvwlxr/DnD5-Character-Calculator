@@ -14,8 +14,8 @@ export const App: FC = () => {
             <Main>
                 <Routes>
                     <Route path="/" element={<Navigate to='/1'/>}/>
-                    <Route path="/1" element={<RaceSelectionPage/>} />
-                    <Route path="/2"/>
+                    <Route path="/1" element={<RaceSelectionPage/>}/>
+                    <Route path="/2" element={<h3 style={{textAlign: 'center'}}>Class Selection Page</h3>}/>
                     <Route path="/3"/>
                     <Route path="/4"/>
                     <Route path="/5"/>

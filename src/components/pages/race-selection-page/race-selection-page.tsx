@@ -2,52 +2,18 @@ import React, {FC} from "react";
 
 import styled from "styled-components";
 
-export const RaceSelectionPage: FC = () => {
-    const cardImage = require('./sample_card_image.jpg');
+import {CardListContainer} from "../../card-list/card-list-container";
+import {InformationSheet} from "../../information-sheet/information-sheet";
 
+export const RaceSelectionPage: FC = () => {
     return (
         <>
             <Subtitle>Раса</Subtitle>
             <Wrapper>
                 <InnerWrapper>
-                    <Card>
-                        <Img src={cardImage} alt="card"/>
-                        <Span>Class name</Span>
-                    </Card>
-                    <Card>
-                        <Img src={cardImage} alt="card"/>
-                        <Span>Class name</Span>
-                    </Card>
-                    <Card>
-                        <Img src={cardImage} alt="card"/>
-                        <Span>Class name</Span>
-                    </Card>
-                    <Card>
-                        <Img src={cardImage} alt="card"/>
-                        <Span>Class name</Span>
-                    </Card>
-                    <Card>
-                        <Img src={cardImage} alt="card"/>
-                        <Span>Class name</Span>
-                    </Card>
-                    <Card>
-                        <Img src={cardImage} alt="card"/>
-                        <Span>Class name</Span>
-                    </Card>
-                    <Card>
-                        <Img src={cardImage} alt="card"/>
-                        <Span>Class name</Span>
-                    </Card>
-                    <Card>
-                        <Img src={cardImage} alt="card"/>
-                        <Span>Class name</Span>
-                    </Card>
-                    <Card>
-                        <Img src={cardImage} alt="card"/>
-                        <Span>Class name</Span>
-                    </Card>
+                    <CardListContainer/>
                 </InnerWrapper>
-                <Sheet/>
+                <InformationSheet/>
             </Wrapper>
         </>
     );
@@ -63,10 +29,11 @@ const Subtitle = styled.h2`
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template: auto / minmax(max-content, auto);
+  grid-template: auto / minmax(auto, auto);
   grid-auto-flow: column;
   grid-auto-columns: minmax(max-content, auto);
   padding: 20px;
+  transition: 3s all;
 `;
 
 const InnerWrapper = styled.div`
@@ -74,50 +41,5 @@ const InnerWrapper = styled.div`
   grid-template: repeat(3, minmax(auto, max-content)) / repeat(3, minmax(auto, max-content));
   gap: 40px;
   margin: 0 auto;
-`;
-
-const Card = styled.button`
-  box-sizing: border-box;
-  position: relative;
-  max-height: 200px;
-  max-width: 200px;
-  padding: 0;
-  border: 1px solid white;
-  text-align: center;
-  color: white;
-  cursor: pointer;
-  transition: 0.5s all;
-  &:hover {
-    transform: scale(1.1);
-    border: 1px solid #E25608;
-    box-shadow: 0 0 25px #E25608;
-  }
-  &:focus {
-    transform: scale(1.1);
-    border: 1px solid #3FA7AE;
-    box-shadow: 0 0 25px #3FA7AE;
-  }
-`;
-
-const Sheet = styled.div`
-  display: block;
-  margin: 0 auto;
-  background-color: white;
-  width: 520px;
-  height: 680px;
-`;
-
-const Img = styled.img`
-  width: 100%;
-  height: 100%;
-`;
-
-const Span = styled.span`
-  position: absolute;
-  width: 100%;
-  bottom: 5%;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 18px;
-  line-height: 21px;
+  transition: 3s all;
 `;

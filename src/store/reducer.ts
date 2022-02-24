@@ -1,8 +1,10 @@
 import {combineReducers} from "@reduxjs/toolkit";
 import {sortObjKeysAlphabetically} from "../utils/sort-object-keys";
-import {calculatorReducer} from "./slices/calculator-slice";
 
-const reducers = {calculatorReducer};
+import {calculatorReducer} from "./slices/calculator-slice";
+import {serviceReducer} from "./slices/service-slice";
+
+const reducers = {calculatorReducer, serviceReducer};
 
 const sortedReducers = sortObjKeysAlphabetically(reducers);
 

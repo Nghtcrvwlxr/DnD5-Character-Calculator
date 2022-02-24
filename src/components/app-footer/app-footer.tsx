@@ -41,33 +41,29 @@ export const AppFooter: FC = () => {
 
     return (
         <footer>
-            <Wrapper>
-                <nav>
-                    <Ul>
-                        {elements}
-                    </Ul>
-                </nav>
-            </Wrapper>
+            <nav>
+                <Ul>
+                    {elements}
+                </Ul>
+            </nav>
         </footer>
     );
 };
 
-const Wrapper = styled.div`
-  height: 60px;
-  text-align: center;
-  width: 400px;
-  margin-left: 50px;
-  color: white;
-`;
-
 const Ul = styled.ul`
+  height: 60px;
+  width: 350px;
+  margin: 0 0 0 15px;
+  padding: 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const Li = styled.li`
   list-style: none;
+  line-height: 0;
 `;
 
 const Circle = styled.button<ButtonProps>`

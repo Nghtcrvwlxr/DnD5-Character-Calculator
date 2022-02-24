@@ -1,5 +1,7 @@
+import {Race} from "../utils/types";
+
 export default class TestService {
-    _races = [
+    _races: Race[] = [
         {
             "index": "dragonborn",
             "name": "Dragonborn",
@@ -38,7 +40,15 @@ export default class TestService {
         }
     ];
 
-    getRaces = async () => {
-        return this._races;
+    getRaces(): Promise<Race[]>  {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (Math.random() > 0.75) {
+                    reject(new Error('Something bad happened'));
+                } else {
+                    resolve(this._races)
+                }
+            }, 1000);
+        });
     };
 }
