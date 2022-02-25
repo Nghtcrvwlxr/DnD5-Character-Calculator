@@ -15,6 +15,9 @@ export const InformationSheet: FC = () => {
         dispatch(clearRace());
     };
 
+    if (!state.race) {
+        return <Sheet isShown={state.showInfo}/>;
+    }
     return (
         <Sheet isShown={state.showInfo}>
             <Wrapper>
@@ -40,16 +43,22 @@ interface InformationSheetProps {
 }
 
 const Sheet = styled.div<InformationSheetProps>`
+  position: fixed;
   box-sizing: border-box;
-  margin-left: 30px;
   background-color: white;
   width: 520px;
   height: 680px;
   padding: 20px;
+  transition: 1s all;
   ${props => (props.isShown) ? `
-  display: block;
+    visibility: visible;
+    right: 15vw;
+    opacity: 1;
   ` : `
-  display: none;
+    visibility: hidden;
+    right: 0;
+    opacity: 0;
+    transform: translateX(100%);
   `};
 `;
 
@@ -72,6 +81,7 @@ const CloseButton = styled.button`
   &:hover {
     transform: scale(1.05);
     box-shadow: 0 0 5px black;
+    background: #ef6725;
   };
   &:active {
     transform: scale(0.9);
@@ -88,9 +98,8 @@ const SelectButton = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #E25608;
+  background: #3FA7AE;
   color: white;
-  border: none;
   margin-top: auto;
   text-decoration: none;
   text-transform: uppercase;
@@ -100,6 +109,7 @@ const SelectButton = styled(Link)`
   &:hover {
     transform: scale(1.05);
     box-shadow: 0 0 5px black;
+    background: #19b7c5;
   };
   &:active {
     transform: scale(0.9);

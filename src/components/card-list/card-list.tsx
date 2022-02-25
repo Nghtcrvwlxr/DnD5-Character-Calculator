@@ -14,6 +14,7 @@ interface CardListProps {
 export const CardList: FC<CardListProps> = (props) => {
     const dispatch = useTypedDispatch();
     const selectedRace = useTypedSelector(state => state.calculatorReducer.race);
+    const showInfo = useTypedSelector(state => state.calculatorReducer.showInfo);
 
     const cardImage = require('./sample_card_image.jpg');
 
@@ -30,9 +31,9 @@ export const CardList: FC<CardListProps> = (props) => {
         );
     });
     return (
-        <>
+        <CardsWrapper showInfo={showInfo}>
             {elements}
-        </>
+        </CardsWrapper>
     );
 };
 
@@ -52,21 +53,34 @@ const Card = styled.button<CardProps>`
   color: white;
   cursor: pointer;
   transition: 0.5s all;
+  ${props => (!props.selectedRace) ? `
+    &:hover {
+        transform: scale(1.1);
+        border: 1px solid #3FA7AE;
+        box-shadow: 0 0 25px #3FA7AE;
+    };
+  ` : `
+    &:hover {
+        transform: scale(1.1);
+        border: 1px solid #E25608;
+        box-shadow: 0 0 25px #E25608;
+    };
+  `};
   ${props => (props.selectedRace === props.label) ? `
     transform: scale(1.15);
     border: 1px solid #3FA7AE;
     box-shadow: 0 0 25px #3FA7AE;
+    &:hover {
+        transform: scale(1.1);
+        border: 1px solid #3FA7AE;
+        box-shadow: 0 0 25px #3FA7AE;
+    };
+    &:focus {
+        transform: scale(1.15);
+        border: 1px solid #3FA7AE;
+        box-shadow: 0 0 25px #3FA7AE;
+    };
   ` : ``};
-  &:hover {
-    transform: scale(1.1);
-    border: 1px solid #E25608;
-    box-shadow: 0 0 25px #E25608;
-  };
-  &:focus {
-    transform: scale(1.15);
-    border: 1px solid #3FA7AE;
-    box-shadow: 0 0 25px #3FA7AE;
-  };
 `;
 
 const Img = styled.img`
@@ -82,4 +96,18 @@ const Span = styled.span`
   transform: translateX(-50%);
   font-size: 18px;
   line-height: 21px;
+`;
+
+interface CardsWrapperProps {
+    showInfo: boolean;
+}
+
+const CardsWrapper = styled.div<CardsWrapperProps>`
+  display: grid;
+  grid-template: repeat(3, minmax(max-content, max-content)) / repeat(3, minmax(max-content, max-content));
+  gap: 40px;
+  transition: 1s all;
+  ${props => (props.showInfo) ? `
+    margin-right: 50vw;
+  ` : ``};
 `;

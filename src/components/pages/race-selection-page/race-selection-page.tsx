@@ -10,9 +10,7 @@ export const RaceSelectionPage: FC = () => {
         <>
             <Subtitle>Раса</Subtitle>
             <Wrapper>
-                <InnerWrapper>
-                    <CardListContainer/>
-                </InnerWrapper>
+                <CardListContainer/>
                 <InformationSheet/>
             </Wrapper>
         </>
@@ -28,18 +26,9 @@ const Subtitle = styled.h2`
 `;
 
 const Wrapper = styled.div`
-  display: grid;
-  grid-template: auto / minmax(auto, auto);
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(max-content, auto);
+  position: relative;
+  justify-content: center;
+  display: flex;
   padding: 20px;
-  transition: 3s all;
-`;
-
-const InnerWrapper = styled.div`
-  display: grid;
-  grid-template: repeat(3, minmax(auto, max-content)) / repeat(3, minmax(auto, max-content));
-  gap: 40px;
-  margin: 0 auto;
   transition: 3s all;
 `;
