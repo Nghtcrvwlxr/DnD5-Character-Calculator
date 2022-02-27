@@ -1,39 +1,23 @@
-import React, {FC, useContext, useEffect} from "react";
+import React, {FC} from "react";
 
 import styled from "styled-components";
 
-import {useTypedDispatch, useTypedSelector} from "../../store/utils";
-import {dataError, dataLoaded, dataRequested} from "../../store/slices/service-slice";
-import {hideInformation} from "../../store/slices/calculator-slice";
-
-import {Service} from "../service-context/service-context";
+import {useTypedSelector} from "../../store/utils";
 
 import {CardList} from "./card-list";
 import {LoadingIndicator} from "../loading-indicator/loading-indicator";
 import {ErrorIndicator} from "../error-indicator/error-indicator";
 
-import {AppDispatch} from "../../store/store";
-import {Race} from "../../utils/types";
+import {ActionCreatorWithPayload} from "@reduxjs/toolkit";
 
-export const CardListContainer: FC = () => {
-    const dispatch = useTypedDispatch();
+interface CardListContainerProps {
+    selectedField: string;
+    selectFn: ActionCreatorWithPayload<string>;
+}
+
+export const CardListContainer: FC<CardListContainerProps> = (props) => {
     const state = useTypedSelector(state => state.serviceReducer);
-
-    const service = useContext(Service);
-
-    const fetchData = (dataService: any, dispatch: AppDispatch) => {
-        dispatch(dataRequested());
-        dataService.getRaces()
-            .then((data: Race[]) => dispatch(dataLoaded(data)))
-            .catch(() => dispatch(dataError()));
-    };
-
-    useEffect(() => {
-        fetchData(service, dispatch);
-        return () => {
-            dispatch(hideInformation());
-        };
-    }, [service, dispatch]);
+    const showInfo = useTypedSelector(state => state.calculatorReducer.showInfo);
 
     if (state.loading) {
         return (
@@ -49,7 +33,10 @@ export const CardListContainer: FC = () => {
             </ErrorWrapper>
         );
     }
-    return <CardList data={state.data}/>
+    return <CardList data={state.data}
+                     selectedField={props.selectedField}
+                     selectFn={props.selectFn}
+                     showInfo={showInfo}/>
 };
 
 const LoadingWrapper = styled.div`

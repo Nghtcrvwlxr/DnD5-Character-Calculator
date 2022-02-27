@@ -2,19 +2,20 @@ import React, {FC} from "react";
 
 import styled from "styled-components";
 
-import {useTypedDispatch, useTypedSelector} from "../../store/utils";
-import {selectRace} from "../../store/slices/calculator-slice";
+import {useTypedDispatch} from "../../store/utils";
 
 import {Race} from "../../utils/types";
+import {ActionCreatorWithPayload} from "@reduxjs/toolkit";
 
 interface CardListProps {
     data: Race[];
+    selectedField: string;
+    selectFn: ActionCreatorWithPayload<string>;
+    showInfo: boolean;
 }
 
 export const CardList: FC<CardListProps> = (props) => {
     const dispatch = useTypedDispatch();
-    const selectedRace = useTypedSelector(state => state.calculatorReducer.race);
-    const showInfo = useTypedSelector(state => state.calculatorReducer.showInfo);
 
     const cardImage = require('./sample_card_image.jpg');
 
@@ -22,16 +23,16 @@ export const CardList: FC<CardListProps> = (props) => {
         return (
             <Card
                 key={item.index}
-                selectedRace={selectedRace}
+                selectedRace={props.selectedField}
                 label={item.name}
-                onClick={() => dispatch(selectRace(item.name))}>
+                onClick={() => dispatch(props.selectFn(item.name))}>
                 <Img src={cardImage} alt="card"/>
                 <Span>{item.name}</Span>
             </Card>
         );
     });
     return (
-        <CardsWrapper showInfo={showInfo}>
+        <CardsWrapper showInfo={props.showInfo}>
             {elements}
         </CardsWrapper>
     );
@@ -53,19 +54,11 @@ const Card = styled.button<CardProps>`
   color: white;
   cursor: pointer;
   transition: 0.5s all;
-  ${props => (!props.selectedRace) ? `
-    &:hover {
-        transform: scale(1.1);
-        border: 1px solid #3FA7AE;
-        box-shadow: 0 0 25px #3FA7AE;
-    };
-  ` : `
-    &:hover {
-        transform: scale(1.1);
-        border: 1px solid #E25608;
-        box-shadow: 0 0 25px #E25608;
-    };
-  `};
+  &:hover {
+    transform: scale(1.1);
+    border: 1px solid #E25608;
+    box-shadow: 0 0 25px #E25608;
+  };
   ${props => (props.selectedRace === props.label) ? `
     transform: scale(1.15);
     border: 1px solid #3FA7AE;
