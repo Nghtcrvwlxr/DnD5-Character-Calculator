@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import {useTypedDispatch, useTypedSelector} from "../../../store/utils";
 import {dataError, dataLoaded, dataRequested} from "../../../store/slices/service-slice";
-import {hideInformation, selectRace, clearRace} from "../../../store/slices/calculator-slice";
+import {hideInformation, selectClass, clearClass} from "../../../store/slices/calculator-slice";
 
 import {Service} from "../../service-context/service-context";
 
@@ -12,24 +12,24 @@ import {CardListContainer} from "../../card-list/card-list-container";
 import {InformationSheet} from "../../information-sheet/information-sheet";
 
 import {AppDispatch} from "../../../store/store";
-import {Race} from "../../../utils/types";
+import {Class} from "../../../utils/types"
 
-export const RaceSelectionPage: FC = () => {
+export const ClassSelectionPage: FC = () => {
     const dispatch = useTypedDispatch();
-    const raceField = useTypedSelector(state => state.calculatorReducer.race);
+    const classField = useTypedSelector(state => state.calculatorReducer.class);
     const showInfo = useTypedSelector(state => state.calculatorReducer.showInfo);
 
-    const selectFn = selectRace;
-    const clearFn = clearRace;
+    const selectFn = selectClass;
+    const clearFn = clearClass;
 
-    const pageId = 1;
+    const pageId = 2;
 
     const service = useContext(Service);
 
     const fetchData = (dataService: any, dispatch: AppDispatch) => {
         dispatch(dataRequested());
-        dataService.getRaces()
-            .then((data: Race[]) => dispatch(dataLoaded(data)))
+        dataService.getClasses()
+            .then((data: Class[]) => dispatch(dataLoaded(data)))
             .catch(() => dispatch(dataError()));
     };
 
@@ -42,10 +42,10 @@ export const RaceSelectionPage: FC = () => {
 
     return (
         <>
-            <Subtitle>Race</Subtitle>
+            <Subtitle>Class</Subtitle>
             <Wrapper>
-                <CardListContainer selectedField={raceField} selectFn={selectFn}/>
-                <InformationSheet selectedField={raceField} isShown={showInfo} clearFn={clearFn} pageId={pageId}/>
+                <CardListContainer selectedField={classField} selectFn={selectFn}/>
+                <InformationSheet selectedField={classField} isShown={showInfo} clearFn={clearFn} pageId={pageId}/>
             </Wrapper>
         </>
     );

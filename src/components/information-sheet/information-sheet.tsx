@@ -3,44 +3,47 @@ import {Link} from "react-router-dom";
 
 import styled from "styled-components";
 
-import {useTypedDispatch, useTypedSelector} from "../../store/utils";
-import {hideInformation, clearRace} from "../../store/slices/calculator-slice";
+import {useTypedDispatch} from "../../store/utils";
+import {hideInformation} from "../../store/slices/calculator-slice";
 
-export const InformationSheet: FC = () => {
+interface InformationSheetProps {
+    selectedField: string;
+    clearFn: Function;
+    isShown: boolean;
+    pageId: number;
+}
+
+export const InformationSheet: FC<InformationSheetProps> = (props) => {
     const dispatch = useTypedDispatch();
-    const state = useTypedSelector(state => state.calculatorReducer);
 
     const closeAndClear = () => {
         dispatch(hideInformation());
-        dispatch(clearRace());
+        dispatch(props.clearFn());
     };
 
-    if (!state.race) {
-        return <Sheet isShown={state.showInfo}/>;
+    if (!props.selectedField) {
+        return <Sheet selectedField={props.selectedField} isShown={props.isShown} clearFn={props.clearFn} pageId={props.pageId}/>;
     }
+
     return (
-        <Sheet isShown={state.showInfo}>
+        <Sheet selectedField={props.selectedField} isShown={props.isShown} clearFn={props.clearFn} pageId={props.pageId}>
             <Wrapper>
                 <CloseButton
                         onClick={() => closeAndClear()}>
                     Close
                 </CloseButton>
                 <Description>
-                    <h3>{state.race}</h3>
-                    <h5>{state.race} description:</h5>
+                    <h3>{props.selectedField}</h3>
+                    <h5>{props.selectedField} description:</h5>
                     <span>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci amet architecto at deleniti dolor ducimus eaque ex, facere fugit harum id inventore necessitatibus nemo numquam quaerat quos rerum sint, veritatis.
                     </span>
                 </Description>
-                <SelectButton to='/2'>Select</SelectButton>
+                <SelectButton to={{pathname: `/${props.pageId + 1}`}}>Select</SelectButton>
             </Wrapper>
         </Sheet>
     );
 };
-
-interface InformationSheetProps {
-    isShown: boolean;
-}
 
 const Sheet = styled.div<InformationSheetProps>`
   position: fixed;
@@ -52,7 +55,7 @@ const Sheet = styled.div<InformationSheetProps>`
   transition: 1s all;
   ${props => (props.isShown) ? `
     visibility: visible;
-    right: 15vw;
+    right: 10vw;
     opacity: 1;
   ` : `
     visibility: hidden;

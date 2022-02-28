@@ -4,11 +4,11 @@ import styled from "styled-components";
 
 import {useTypedDispatch} from "../../store/utils";
 
-import {Race} from "../../utils/types";
+import {Race, Class} from "../../utils/types";
 import {ActionCreatorWithPayload} from "@reduxjs/toolkit";
 
 interface CardListProps {
-    data: Race[];
+    data: Race[] | Class[];
     selectedField: string;
     selectFn: ActionCreatorWithPayload<string>;
     showInfo: boolean;
@@ -98,9 +98,11 @@ interface CardsWrapperProps {
 const CardsWrapper = styled.div<CardsWrapperProps>`
   display: grid;
   grid-template: repeat(3, minmax(max-content, max-content)) / repeat(3, minmax(max-content, max-content));
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(max-content, max-content);
   gap: 40px;
   transition: 1s all;
   ${props => (props.showInfo) ? `
-    margin-right: 50vw;
+    margin-right: 40vw;
   ` : ``};
 `;

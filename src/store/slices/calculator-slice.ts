@@ -3,11 +3,13 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 interface CalculatorState {
     showInfo: boolean;
     race: string;
+    class: string;
 }
 
 const initialState: CalculatorState = {
     showInfo: false,
     race: '',
+    class: '',
 };
 
 const calculatorSlice = createSlice({
@@ -24,9 +26,16 @@ const calculatorSlice = createSlice({
         clearRace(state) {
             state.race = '';
         },
+        selectClass(state, action: PayloadAction<string>) {
+            state.class = action.payload;
+            state.showInfo = true;
+        },
+        clearClass(state) {
+            state.class = '';
+        },
     }
 });
 
 export const {reducer: calculatorReducer} = calculatorSlice;
 
-export const {hideInformation, selectRace, clearRace} = calculatorSlice.actions;
+export const {hideInformation, selectRace, clearRace, selectClass, clearClass} = calculatorSlice.actions;

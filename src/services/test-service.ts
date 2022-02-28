@@ -1,4 +1,4 @@
-import {Race} from "../utils/types";
+import {Race, Class} from "../utils/types";
 
 export default class TestService {
     _races: Race[] = [
@@ -40,6 +40,57 @@ export default class TestService {
         }
     ];
 
+    _classes: Class[] = [
+        {
+            "index": "barbarian",
+            "name": "Barbarian",
+        },
+        {
+            "index": "bard",
+            "name": "Bard",
+        },
+        {
+            "index": "cleric",
+            "name": "Cleric",
+        },
+        {
+            "index": "druid",
+            "name": "Druid",
+        },
+        {
+            "index": "fighter",
+            "name": "Fighter",
+        },
+        {
+            "index": "monk",
+            "name": "Monk",
+        },
+        {
+            "index": "paladin",
+            "name": "Paladin",
+        },
+        {
+            "index": "ranger",
+            "name": "Ranger",
+        },
+        {
+            "index": "rogue",
+            "name": "Rogue",
+        },
+        {
+            "index": "sorcerer",
+            "name": "Sorcerer",
+        },
+        {
+            "index": "warlock",
+            "name": "Warlock",
+        },
+        {
+            "index": "wizard",
+            "name": "Wizard",
+        }
+    ];
+
     getRaces(): Promise<Race[]>  {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -47,6 +98,18 @@ export default class TestService {
                     reject(new Error('Something bad happened'));
                 } else {
                     resolve(this._races)
+                }
+            }, 1000);
+        });
+    };
+
+    getClasses(): Promise<Class[]>  {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (Math.random() > 0.75) {
+                    reject(new Error('Something bad happened'));
+                } else {
+                    resolve(this._classes)
                 }
             }, 1000);
         });
