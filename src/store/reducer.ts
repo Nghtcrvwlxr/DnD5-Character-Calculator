@@ -3,8 +3,9 @@ import {sortObjKeysAlphabetically} from "../utils/sort-object-keys";
 
 import {calculatorReducer} from "./slices/calculator-slice";
 import {serviceReducer} from "./slices/service-slice";
+import {navigationReducer} from "./slices/navigation-slice";
 
-const reducers = {calculatorReducer, serviceReducer};
+const reducers = {calculatorReducer, serviceReducer, navigationReducer};
 
 const sortedReducers = sortObjKeysAlphabetically(reducers);
 

@@ -5,6 +5,7 @@ import styled from "styled-components";
 import {useTypedDispatch, useTypedSelector} from "../../../store/utils";
 import {dataError, dataLoaded, dataRequested} from "../../../store/slices/service-slice";
 import {hideInformation, selectBackground, clearBackground} from "../../../store/slices/calculator-slice";
+import {getNextPage, updateCurrentPage} from "../../../store/slices/navigation-slice";
 
 import {Service} from "../../service-context/service-context";
 
@@ -22,7 +23,7 @@ export const BackgroundSelectionPage: FC = () => {
     const selectFn = selectBackground;
     const clearFn = clearBackground;
 
-    const pageId = 3;
+    const url = window.location.pathname;
 
     const service = useContext(Service);
 
@@ -34,18 +35,20 @@ export const BackgroundSelectionPage: FC = () => {
     };
 
     useEffect(() => {
+        dispatch(updateCurrentPage(url));
+        dispatch(getNextPage(url));
         fetchData(service, dispatch);
         return () => {
             dispatch(hideInformation());
         };
-    }, [service, dispatch]);
+    }, [service, dispatch, url]);
 
     return (
         <>
             <Subtitle>Background</Subtitle>
             <Wrapper>
                 <CardListContainer selectedField={backgroundField} selectFn={selectFn}/>
-                <InformationSheet selectedField={backgroundField} isShown={showInfo} clearFn={clearFn} pageId={pageId}/>
+                <InformationSheet selectedField={backgroundField} isShown={showInfo} clearFn={clearFn}/>
             </Wrapper>
         </>
     );

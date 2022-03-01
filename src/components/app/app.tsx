@@ -15,16 +15,15 @@ export const App: FC = () => {
             <AppHeader/>
             <Main>
                 <Routes>
-                    <Route path="/" element={<Navigate to='/1'/>}/>
-                    <Route path="/1" element={<RaceSelectionPage/>}/>
-                    <Route path="/2" element={<ClassSelectionPage/>}/>
-                    <Route path="/3" element={<BackgroundSelectionPage/>}/>
-                    <Route path="/4" element={<h3 style={{textAlign: 'center'}}>Stats selection page</h3>}/>
-                    <Route path="/5"/>
-                    <Route path="/6"/>
-                    <Route path="/7"/>
-                    <Route path="/8"/>
-                    <Route path="/9"/>
+                    <Route path="/" element={<Navigate to='/race-selection'/>}/>
+                    <Route path="/race-selection" element={<RaceSelectionPage/>}/>
+                    <Route path="/class-selection" element={<ClassSelectionPage/>}/>
+                    <Route path="/background-selection" element={<BackgroundSelectionPage/>}/>
+                    <Route path="/stats-selection" element={<h3 style={{textAlign: 'center'}}>Stats selection page</h3>}/>
+                    <Route path="/proficiencies-selection" element={<h3 style={{textAlign: 'center'}}>Proficiencies selection page</h3>}/>
+                    <Route path="/equipment-selection" element={<h3 style={{textAlign: 'center'}}>Equipment selection page</h3>}/>
+                    <Route path="/spells-selection" element={<h3 style={{textAlign: 'center'}}>Spells selection page</h3>}/>
+                    <Route path="/character-list" element={<h3 style={{textAlign: 'center'}}>Character list page</h3>}/>
                     <Route path="*" element={<h3 style={{textAlign: 'center'}}>This page does not exist</h3>}/>
                 </Routes>
             </Main>

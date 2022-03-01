@@ -5,6 +5,7 @@ import styled from "styled-components";
 import {useTypedDispatch, useTypedSelector} from "../../../store/utils";
 import {dataError, dataLoaded, dataRequested} from "../../../store/slices/service-slice";
 import {hideInformation, selectRace, clearRace} from "../../../store/slices/calculator-slice";
+import {getNextPage, updateCurrentPage} from "../../../store/slices/navigation-slice";
 
 import {Service} from "../../service-context/service-context";
 
@@ -22,7 +23,7 @@ export const RaceSelectionPage: FC = () => {
     const selectFn = selectRace;
     const clearFn = clearRace;
 
-    const pageId = 1;
+    const url = window.location.pathname;
 
     const service = useContext(Service);
 
@@ -34,18 +35,20 @@ export const RaceSelectionPage: FC = () => {
     };
 
     useEffect(() => {
+        dispatch(updateCurrentPage(url));
+        dispatch(getNextPage(url));
         fetchData(service, dispatch);
         return () => {
             dispatch(hideInformation());
         };
-    }, [service, dispatch]);
+    }, [service, dispatch, url]);
 
     return (
         <>
             <Subtitle>Race</Subtitle>
             <Wrapper>
                 <CardListContainer selectedField={raceField} selectFn={selectFn}/>
-                <InformationSheet selectedField={raceField} isShown={showInfo} clearFn={clearFn} pageId={pageId}/>
+                <InformationSheet selectedField={raceField} isShown={showInfo} clearFn={clearFn}/>
             </Wrapper>
         </>
     );

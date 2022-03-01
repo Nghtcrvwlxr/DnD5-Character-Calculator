@@ -5,6 +5,7 @@ import styled from "styled-components";
 import {useTypedDispatch, useTypedSelector} from "../../../store/utils";
 import {dataError, dataLoaded, dataRequested} from "../../../store/slices/service-slice";
 import {hideInformation, selectClass, clearClass} from "../../../store/slices/calculator-slice";
+import {getNextPage, updateCurrentPage} from "../../../store/slices/navigation-slice";
 
 import {Service} from "../../service-context/service-context";
 
@@ -22,7 +23,7 @@ export const ClassSelectionPage: FC = () => {
     const selectFn = selectClass;
     const clearFn = clearClass;
 
-    const pageId = 2;
+    const url = window.location.pathname;
 
     const service = useContext(Service);
 
@@ -34,18 +35,20 @@ export const ClassSelectionPage: FC = () => {
     };
 
     useEffect(() => {
+        dispatch(updateCurrentPage(url));
+        dispatch(getNextPage(url));
         fetchData(service, dispatch);
         return () => {
             dispatch(hideInformation());
         };
-    }, [service, dispatch]);
+    }, [service, dispatch, url]);
 
     return (
         <>
             <Subtitle>Class</Subtitle>
             <Wrapper>
                 <CardListContainer selectedField={classField} selectFn={selectFn}/>
-                <InformationSheet selectedField={classField} isShown={showInfo} clearFn={clearFn} pageId={pageId}/>
+                <InformationSheet selectedField={classField} isShown={showInfo} clearFn={clearFn}/>
             </Wrapper>
         </>
     );

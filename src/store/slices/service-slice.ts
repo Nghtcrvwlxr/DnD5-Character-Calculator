@@ -19,7 +19,6 @@ const serviceSlice = createSlice({
     initialState,
     reducers: {
         dataRequested() {
-            console.log('dataRequested');
             return {
                 data: [],
                 loading: true,
@@ -27,12 +26,10 @@ const serviceSlice = createSlice({
             };
         },
         dataLoaded(state, action: PayloadAction<Race[] | Class[] | Background[]>) {
-            console.log('dataLoaded');
             state.loading = false;
             state.data = action.payload;
         },
         dataError() {
-            console.log('dataError');
             return {
                 data: [],
                 loading: false,

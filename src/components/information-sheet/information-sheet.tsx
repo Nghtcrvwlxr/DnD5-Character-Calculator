@@ -3,18 +3,18 @@ import {Link} from "react-router-dom";
 
 import styled from "styled-components";
 
-import {useTypedDispatch} from "../../store/utils";
+import {useTypedDispatch, useTypedSelector} from "../../store/utils";
 import {hideInformation} from "../../store/slices/calculator-slice";
 
 interface InformationSheetProps {
     selectedField: string;
     clearFn: Function;
     isShown: boolean;
-    pageId: number;
 }
 
 export const InformationSheet: FC<InformationSheetProps> = (props) => {
     const dispatch = useTypedDispatch();
+    const nextPageURL = useTypedSelector(state => state.navigationReducer.nextPage);
 
     const closeAndClear = () => {
         dispatch(hideInformation());
@@ -22,11 +22,11 @@ export const InformationSheet: FC<InformationSheetProps> = (props) => {
     };
 
     if (!props.selectedField) {
-        return <Sheet selectedField={props.selectedField} isShown={props.isShown} clearFn={props.clearFn} pageId={props.pageId}/>;
+        return <Sheet selectedField={props.selectedField} isShown={props.isShown} clearFn={props.clearFn}/>;
     }
 
     return (
-        <Sheet selectedField={props.selectedField} isShown={props.isShown} clearFn={props.clearFn} pageId={props.pageId}>
+        <Sheet selectedField={props.selectedField} isShown={props.isShown} clearFn={props.clearFn}>
             <Wrapper>
                 <CloseButton
                         onClick={() => closeAndClear()}>
@@ -39,7 +39,7 @@ export const InformationSheet: FC<InformationSheetProps> = (props) => {
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci amet architecto at deleniti dolor ducimus eaque ex, facere fugit harum id inventore necessitatibus nemo numquam quaerat quos rerum sint, veritatis.
                     </span>
                 </Description>
-                <SelectButton to={{pathname: `/${props.pageId + 1}`}}>Select</SelectButton>
+                <SelectButton to={nextPageURL}>Select</SelectButton>
             </Wrapper>
         </Sheet>
     );
