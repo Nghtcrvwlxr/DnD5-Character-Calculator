@@ -1,4 +1,4 @@
-import {Race, Class} from "../utils/types";
+import {Race, Class, Background} from "../utils/types";
 
 export default class TestService {
     _races: Race[] = [
@@ -91,6 +91,57 @@ export default class TestService {
         }
     ];
 
+    _backgrounds: Background[] = [
+        {
+            "index": "charlatan",
+            "name": "Charlatan",
+        },
+        {
+            "index": "criminal",
+            "name": "Criminal",
+        },
+        {
+            "index": "entertainer",
+            "name": "Entertainer",
+        },
+        {
+            "index": "folk hero",
+            "name": "Folk hero",
+        },
+        {
+            "index": "guild artisan",
+            "name": "Guild artisan",
+        },
+        {
+            "index": "hermit",
+            "name": "Hermit",
+        },
+        {
+            "index": "outlander",
+            "name": "Outlander",
+        },
+        {
+            "index": "noble",
+            "name": "Noble",
+        },
+        {
+            "index": "sage",
+            "name": "Sage",
+        },
+        {
+            "index": "sailor",
+            "name": "Sailor",
+        },
+        {
+            "index": "soldier",
+            "name": "Soldier",
+        },
+        {
+            "index": "urchin",
+            "name": "Urchin",
+        }
+    ];
+
     getRaces(): Promise<Race[]>  {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -110,6 +161,18 @@ export default class TestService {
                     reject(new Error('Something bad happened'));
                 } else {
                     resolve(this._classes)
+                }
+            }, 1000);
+        });
+    };
+
+    getBackgrounds(): Promise<Background[]>  {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (Math.random() > 0.75) {
+                    reject(new Error('Something bad happened'));
+                } else {
+                    resolve(this._backgrounds)
                 }
             }, 1000);
         });

@@ -7,6 +7,7 @@ import {AppHeader} from "../app-header/app-header";
 import {AppFooter} from "../app-footer/app-footer";
 import {RaceSelectionPage} from "../pages/race-selection-page/race-selection-page";
 import {ClassSelectionPage} from "../pages/class-selection-page/class-selection-page";
+import {BackgroundSelectionPage} from "../pages/background-selection-page/background-selection-page";
 
 export const App: FC = () => {
     return (
@@ -17,8 +18,8 @@ export const App: FC = () => {
                     <Route path="/" element={<Navigate to='/1'/>}/>
                     <Route path="/1" element={<RaceSelectionPage/>}/>
                     <Route path="/2" element={<ClassSelectionPage/>}/>
-                    <Route path="/3" element={<h3 style={{textAlign: 'center'}}>Backstory Selection Page</h3>}/>
-                    <Route path="/4"/>
+                    <Route path="/3" element={<BackgroundSelectionPage/>}/>
+                    <Route path="/4" element={<h3 style={{textAlign: 'center'}}>Stats selection page</h3>}/>
                     <Route path="/5"/>
                     <Route path="/6"/>
                     <Route path="/7"/>

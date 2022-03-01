@@ -1,9 +1,9 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-import {Race, Class} from "../../utils/types";
+import {Race, Class, Background} from "../../utils/types";
 
 interface ServiceState {
-    data: Race[] | Class[],
+    data: Race[] | Class[] | Background[],
     loading: boolean,
     error: boolean | null,
 }
@@ -26,7 +26,7 @@ const serviceSlice = createSlice({
                 error: null,
             };
         },
-        dataLoaded(state, action: PayloadAction<Race[] | Class[]>) {
+        dataLoaded(state, action: PayloadAction<Race[] | Class[] | Background[]>) {
             console.log('dataLoaded');
             state.loading = false;
             state.data = action.payload;
