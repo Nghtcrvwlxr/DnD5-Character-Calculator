@@ -2,11 +2,8 @@ import React, {FC} from "react";
 
 import styled from "styled-components";
 
-interface Button {
-    id: number;
-    active: boolean;
-    locked: boolean;
-}
+import {useTypedSelector} from "../../store/utils";
+import {useNavigate} from "react-router-dom"
 
 interface ButtonProps {
     isActive: boolean;
@@ -14,28 +11,27 @@ interface ButtonProps {
 }
 
 export const AppFooter: FC = () => {
-    const buttons: Button[] = [
-        {id: 1, active: false, locked: false},
-        {id: 2, active: true, locked: false},
-        {id: 3, active: false, locked: true},
-        {id: 4, active: false, locked: true},
-        {id: 5, active: false, locked: true},
-        {id: 6, active: false, locked: true},
-        {id: 7, active: false, locked: true},
-        {id: 8, active: false, locked: true},
-        {id: 9, active: false, locked: true},
-        {id: 10, active: false, locked: true}
-    ];
+    const navigationState = useTypedSelector(state => state.navigationReducer);
 
-    const elements = buttons.map((element) => {
+    const navigate = useNavigate();
+
+    let currentIdx = navigationState.pages.findIndex(page => page.url === navigationState.currentPage)
+
+    const elements = navigationState.pages.map((element, idx) => {
+        let isActive: boolean;
+        let isLocked: boolean;
+
+        isLocked = idx > currentIdx;
+        isActive = idx === currentIdx;
+
         return (
             <Li key={element.id}>
                 <Circle
-                    key={element.id}
-                    isActive={element.active}
-                    isLocked={element.locked}>
-                </Circle>
+                    onClick={() => navigate(element.url)}
+                    isActive={isActive}
+                    isLocked={isLocked}/>
             </Li>
+
         );
     });
 
@@ -52,7 +48,7 @@ export const AppFooter: FC = () => {
 
 const Ul = styled.ul`
   height: 60px;
-  width: 350px;
+  width: min-content;
   margin: 0 0 0 15px;
   padding: 0;
   display: flex;
@@ -69,17 +65,25 @@ const Li = styled.li`
 const Circle = styled.button<ButtonProps>`
   height: 30px;
   width: 30px;
+  margin-right: 10px;
   border: 1px solid white;
   border-radius: 100%;
   background-color: #E25608;
+  cursor: pointer;
   transition: 1s all;
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #E25608;
+  }
   ${props => (props.isActive) ? `
   background-color: #3FA7AE;
-  transform: scale(1.1);
+  transform: scale(1.15);
+  box-shadow: 0 0 20px #3FA7AE;
   ` : `
   background-color: #E25608;
   `};
   ${props => (props.isLocked) ? `
   background-color: #A2A2A2;
+  pointer-events: none;
   ` : ``};
 `;

@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 interface Page {
+    id: string;
     url: string,
 }
 
@@ -12,14 +13,14 @@ interface navigationState {
 
 const initialState: navigationState = {
     pages: [
-        {url: '/race-selection'},
-        {url: '/class-selection'},
-        {url: '/background-selection'},
-        {url: '/stats-selection'},
-        {url: '/proficiencies-selection'},
-        {url: '/equipment-selection'},
-        {url: '/spells-selection'},
-        {url: '/character-list'},
+        {id: 'race', url: '/race-selection'},
+        {id: 'class', url: '/class-selection'},
+        {id: 'background', url: '/background-selection'},
+        {id: 'stats', url: '/stats-selection'},
+        {id: 'proficiencies', url: '/proficiencies-selection'},
+        {id: 'equipment', url: '/equipment-selection'},
+        {id: 'spells', url: '/spells-selection'},
+        {id: 'list', url: '/character-list'},
     ],
     currentPage: '',
     nextPage: '',
@@ -32,7 +33,7 @@ const navigationSlice = createSlice({
         updateCurrentPage(state, action: PayloadAction<string>) {
             state.currentPage = action.payload;
         },
-        getNextPage(state, action: PayloadAction<string>){
+        getNextPage(state, action: PayloadAction<string>) {
             const currentIdx = state.pages.findIndex(page => page.url === action.payload);
             if (state.pages.length > currentIdx + 1) {
                 state.nextPage = state.pages[currentIdx + 1].url;
