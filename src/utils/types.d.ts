@@ -12,3 +12,7 @@ export interface Background {
     index: string;
     name: string;
 }
+
+interface CardPageProps {
+    fieldKey: string;
+}

@@ -3,8 +3,8 @@ import React, {FC, useContext, useEffect} from "react";
 import styled from "styled-components";
 
 import {useTypedDispatch, useTypedSelector} from "../../../store/utils";
-import {dataError, dataLoaded, dataRequested} from "../../../store/slices/service-slice";
-import {hideInformation, selectBackground, clearBackground} from "../../../store/slices/calculator-slice";
+
+import {hideInformation} from "../../../store/slices/calculator-slice";
 import {getNextPage, updateCurrentPage} from "../../../store/slices/navigation-slice";
 
 import {Service} from "../../service-context/service-context";
@@ -12,27 +12,18 @@ import {Service} from "../../service-context/service-context";
 import {CardListContainer} from "../../card-list/card-list-container";
 import {InformationSheet} from "../../information-sheet/information-sheet";
 
-import {AppDispatch} from "../../../store/store";
-import {Background} from "../../../utils/types"
+import {CardPageProps} from "../../../utils/types";
 
-export const BackgroundSelectionPage: FC = () => {
+export const BackgroundSelectionPage: FC<CardPageProps> = ({fieldKey}) => {
     const dispatch = useTypedDispatch();
-    const backgroundField = useTypedSelector(state => state.calculatorReducer.background);
+    // @ts-ignore
+    const currentField = useTypedSelector(state => state.calculatorReducer[fieldKey]);
     const showInfo = useTypedSelector(state => state.calculatorReducer.showInfo);
-
-    const selectFn = selectBackground;
-    const clearFn = clearBackground;
 
     const url = window.location.pathname;
 
     const service = useContext(Service);
-
-    const fetchData = (dataService: any, dispatch: AppDispatch) => {
-        dispatch(dataRequested());
-        dataService.getBackgrounds()
-            .then((data: Background[]) => dispatch(dataLoaded(data)))
-            .catch(() => dispatch(dataError()));
-    };
+    const fetchData = service.fetchBackgrounds;
 
     useEffect(() => {
         dispatch(updateCurrentPage(url));
@@ -41,14 +32,14 @@ export const BackgroundSelectionPage: FC = () => {
         return () => {
             dispatch(hideInformation());
         };
-    }, [service, dispatch, url]);
+    }, [service, fetchData, dispatch, url]);
 
     return (
         <>
             <Subtitle>Background</Subtitle>
             <Wrapper>
-                <CardListContainer selectedField={backgroundField} selectFn={selectFn}/>
-                <InformationSheet selectedField={backgroundField} isShown={showInfo} clearFn={clearFn}/>
+                <CardListContainer currentField={currentField} fieldKey={fieldKey}/>
+                <InformationSheet currentField={currentField} isShown={showInfo} fieldKey={fieldKey}/>
             </Wrapper>
         </>
     );

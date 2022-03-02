@@ -1,4 +1,7 @@
+import {dataError, dataLoaded, dataRequested} from "../store/slices/service-slice";
+
 import {Race, Class, Background} from "../utils/types";
+import {AppDispatch} from "../store/store";
 
 export default class TestService {
     _races: Race[] = [
@@ -153,7 +156,6 @@ export default class TestService {
             }, 1000);
         });
     };
-
     getClasses(): Promise<Class[]>  {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -165,7 +167,6 @@ export default class TestService {
             }, 1000);
         });
     };
-
     getBackgrounds(): Promise<Background[]>  {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -176,5 +177,24 @@ export default class TestService {
                 }
             }, 1000);
         });
+    };
+
+    fetchRaces = (dataService: any, dispatch: AppDispatch) => {
+        dispatch(dataRequested());
+        dataService.getRaces()
+            .then((data: Race[]) => dispatch(dataLoaded(data)))
+            .catch(() => dispatch(dataError()));
+    };
+    fetchClasses = (dataService: any, dispatch: AppDispatch) => {
+        dispatch(dataRequested());
+        dataService.getClasses()
+            .then((data: Race[]) => dispatch(dataLoaded(data)))
+            .catch(() => dispatch(dataError()));
+    };
+    fetchBackgrounds = (dataService: any, dispatch: AppDispatch) => {
+        dispatch(dataRequested());
+        dataService.getBackgrounds()
+            .then((data: Race[]) => dispatch(dataLoaded(data)))
+            .catch(() => dispatch(dataError()));
     };
 }

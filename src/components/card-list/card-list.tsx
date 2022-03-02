@@ -4,13 +4,14 @@ import styled from "styled-components";
 
 import {useTypedDispatch} from "../../store/utils";
 
-import {Race, Class} from "../../utils/types";
-import {ActionCreatorWithPayload} from "@reduxjs/toolkit";
+import {selectField} from "../../store/slices/calculator-slice";
+
+import {Race, Class, Background} from "../../utils/types";
 
 interface CardListProps {
-    data: Race[] | Class[];
-    selectedField: string;
-    selectFn: ActionCreatorWithPayload<string>;
+    data: Race[] | Class[] | Background[];
+    fieldKey: string;
+    currentField: string;
     showInfo: boolean;
 }
 
@@ -23,9 +24,9 @@ export const CardList: FC<CardListProps> = (props) => {
         return (
             <Card
                 key={item.index}
-                selectedRace={props.selectedField}
+                selectedField={props.currentField}
                 label={item.name}
-                onClick={() => dispatch(props.selectFn(item.name))}>
+                onClick={() => dispatch(selectField({field: props.fieldKey, name: item.name}))}>
                 <Img src={cardImage} alt="card"/>
                 <Span>{item.name}</Span>
             </Card>
@@ -39,7 +40,7 @@ export const CardList: FC<CardListProps> = (props) => {
 };
 
 interface CardProps {
-    selectedRace: string;
+    selectedField: string;
     label: string;
 }
 
@@ -59,7 +60,7 @@ const Card = styled.button<CardProps>`
     border: 1px solid #E25608;
     box-shadow: 0 0 25px #E25608;
   };
-  ${props => (props.selectedRace === props.label) ? `
+  ${props => (props.selectedField === props.label) ? `
     transform: scale(1.15);
     border: 1px solid #3FA7AE;
     box-shadow: 0 0 25px #3FA7AE;

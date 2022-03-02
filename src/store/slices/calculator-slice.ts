@@ -9,9 +9,9 @@ interface CalculatorState {
 
 const initialState: CalculatorState = {
     showInfo: false,
-    race: '',
-    class: '',
-    background: '',
+    "race": '',
+    "class": '',
+    "background": '',
 };
 
 const calculatorSlice = createSlice({
@@ -21,26 +21,14 @@ const calculatorSlice = createSlice({
         hideInformation(state) {
             state.showInfo = false;
         },
-        selectRace(state, action: PayloadAction<string>) {
-            state.race = action.payload;
+        selectField(state, action: PayloadAction<{field: any, name: string}>) {
+            // @ts-ignore
+            state[action.payload.field] = action.payload.name;
             state.showInfo = true;
         },
-        clearRace(state) {
-            state.race = '';
-        },
-        selectClass(state, action: PayloadAction<string>) {
-            state.class = action.payload;
-            state.showInfo = true;
-        },
-        clearClass(state) {
-            state.class = '';
-        },
-        selectBackground(state, action: PayloadAction<string>) {
-            state.background = action.payload;
-            state.showInfo = true;
-        },
-        clearBackground(state) {
-            state.background = '';
+        clearField(state, action: PayloadAction<string>) {
+            // @ts-ignore
+            state[action.payload] = '';
         },
     }
 });
@@ -49,9 +37,5 @@ export const {reducer: calculatorReducer} = calculatorSlice;
 
 export const {
     hideInformation,
-    selectRace,
-    clearRace,
-    selectClass,
-    clearClass,
-    selectBackground,
-    clearBackground} = calculatorSlice.actions;
+    selectField,
+    clearField} = calculatorSlice.actions;

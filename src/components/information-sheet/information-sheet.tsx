@@ -6,9 +6,11 @@ import styled from "styled-components";
 import {useTypedDispatch, useTypedSelector} from "../../store/utils";
 import {hideInformation} from "../../store/slices/calculator-slice";
 
+import {clearField} from "../../store/slices/calculator-slice";
+
 interface InformationSheetProps {
-    selectedField: string;
-    clearFn: Function;
+    fieldKey: string;
+    currentField: string;
     isShown: boolean;
 }
 
@@ -18,23 +20,23 @@ export const InformationSheet: FC<InformationSheetProps> = (props) => {
 
     const closeAndClear = () => {
         dispatch(hideInformation());
-        dispatch(props.clearFn());
+        dispatch(clearField(props.fieldKey));
     };
 
-    if (!props.selectedField) {
-        return <Sheet selectedField={props.selectedField} isShown={props.isShown} clearFn={props.clearFn}/>;
+    if (!props.currentField) {
+        return <Sheet {...props}/>;
     }
 
     return (
-        <Sheet selectedField={props.selectedField} isShown={props.isShown} clearFn={props.clearFn}>
+        <Sheet {...props}>
             <Wrapper>
                 <CloseButton
                         onClick={() => closeAndClear()}>
                     Close
                 </CloseButton>
                 <Description>
-                    <h3>{props.selectedField}</h3>
-                    <h5>{props.selectedField} description:</h5>
+                    <h3>{props.currentField}</h3>
+                    <h5>{props.currentField} description:</h5>
                     <span>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci amet architecto at deleniti dolor ducimus eaque ex, facere fugit harum id inventore necessitatibus nemo numquam quaerat quos rerum sint, veritatis.
                     </span>

@@ -8,11 +8,9 @@ import {CardList} from "./card-list";
 import {LoadingIndicator} from "../loading-indicator/loading-indicator";
 import {ErrorIndicator} from "../error-indicator/error-indicator";
 
-import {ActionCreatorWithPayload} from "@reduxjs/toolkit";
-
 interface CardListContainerProps {
-    selectedField: string;
-    selectFn: ActionCreatorWithPayload<string>;
+    fieldKey: string
+    currentField: string;
 }
 
 export const CardListContainer: FC<CardListContainerProps> = (props) => {
@@ -34,8 +32,8 @@ export const CardListContainer: FC<CardListContainerProps> = (props) => {
         );
     }
     return <CardList data={state.data}
-                     selectedField={props.selectedField}
-                     selectFn={props.selectFn}
+                     fieldKey={props.fieldKey}
+                     currentField={props.currentField}
                      showInfo={showInfo}/>
 };
 
