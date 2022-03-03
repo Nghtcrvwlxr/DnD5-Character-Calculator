@@ -179,21 +179,21 @@ export default class TestService {
         });
     };
 
-    fetchRaces = (dataService: any, dispatch: AppDispatch) => {
+    fetchRaces = (dispatch: AppDispatch) => {
         dispatch(dataRequested());
-        dataService.getRaces()
+        this.getRaces()
             .then((data: Race[]) => dispatch(dataLoaded(data)))
             .catch(() => dispatch(dataError()));
     };
-    fetchClasses = (dataService: any, dispatch: AppDispatch) => {
+    fetchClasses = (dispatch: AppDispatch) => {
         dispatch(dataRequested());
-        dataService.getClasses()
+        this.getClasses()
             .then((data: Race[]) => dispatch(dataLoaded(data)))
             .catch(() => dispatch(dataError()));
     };
-    fetchBackgrounds = (dataService: any, dispatch: AppDispatch) => {
+    fetchBackgrounds = (dispatch: AppDispatch) => {
         dispatch(dataRequested());
-        dataService.getBackgrounds()
+        this.getBackgrounds()
             .then((data: Race[]) => dispatch(dataLoaded(data)))
             .catch(() => dispatch(dataError()));
     };

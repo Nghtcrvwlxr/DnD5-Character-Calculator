@@ -15,4 +15,6 @@ export interface Background {
 
 interface CardPageProps {
     fieldKey: string;
+    fetchData?: Function;
+    label?: string;
 }

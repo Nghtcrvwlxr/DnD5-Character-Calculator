@@ -8,8 +8,10 @@ import {selectField} from "../../store/slices/calculator-slice";
 
 import {Race, Class, Background} from "../../utils/types";
 
+type Data = Race[] | Class[] | Background[];
+
 interface CardListProps {
-    data: Race[] | Class[] | Background[];
+    data: Data;
     fieldKey: string;
     currentField: string;
     showInfo: boolean;
