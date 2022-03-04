@@ -1,6 +1,7 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { Thunk } from "../store";
 
-interface CalculatorState {
+interface CalculatorState extends Record<string, any> {
     showInfo: boolean;
     race: string;
     class: string;
@@ -21,21 +22,20 @@ const calculatorSlice = createSlice({
         hideInformation(state) {
             state.showInfo = false;
         },
-        selectField(state, action: PayloadAction<{field: any, name: string}>) {
-            // @ts-ignore
+        selectField(state, action: PayloadAction<{ field: string, name: string }>) {
             state[action.payload.field] = action.payload.name;
             state.showInfo = true;
         },
         clearField(state, action: PayloadAction<string>) {
-            // @ts-ignore
             state[action.payload] = '';
         },
     }
 });
 
-export const {reducer: calculatorReducer} = calculatorSlice;
+export const { reducer: calculatorReducer } = calculatorSlice;
 
 export const {
     hideInformation,
     selectField,
-    clearField} = calculatorSlice.actions;
+    clearField
+} = calculatorSlice.actions;

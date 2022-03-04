@@ -1,44 +1,38 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import {Race, Class, Background} from "../../utils/types";
+import { Background, Class, Race } from "../../utils/types";
 
 interface ServiceState {
-    data: Race[] | Class[] | Background[],
-    loading: boolean,
-    error: boolean | null,
+  data: Race[] | Class[] | Background[];
+  loading: boolean;
+  error: boolean | null;
 }
 
 const initialState: ServiceState = {
-    data: [],
-    loading: true,
-    error: null,
+  data: [],
+  loading: true,
+  error: null,
 };
 
 const serviceSlice = createSlice({
-    name: 'serviceReducer',
-    initialState,
-    reducers: {
-        dataRequested() {
-            return {
-                data: [],
-                loading: true,
-                error: null,
-            };
-        },
-        dataLoaded(state, action: PayloadAction<Race[] | Class[] | Background[]>) {
-            state.loading = false;
-            state.data = action.payload;
-        },
-        dataError() {
-            return {
-                data: [],
-                loading: false,
-                error: true,
-            };
-        },
-    }
+  name: "serviceReducer",
+  initialState,
+  reducers: {
+    dataRequested() {
+      return initialState;
+    },
+    dataLoaded(state, action: PayloadAction<Race[] | Class[] | Background[]>) {
+      state.loading = false;
+      state.data = action.payload;
+    },
+    dataError(state) {
+      state.loading = false;
+      state.data = [];
+      state.error = true;
+    },
+  },
 });
 
-export const {reducer: serviceReducer} = serviceSlice;
+export const { reducer: serviceReducer } = serviceSlice;
 
-export const {dataRequested, dataLoaded, dataError} = serviceSlice.actions;
+export const { dataRequested, dataLoaded, dataError } = serviceSlice.actions;
