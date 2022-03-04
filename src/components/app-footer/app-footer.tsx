@@ -1,49 +1,39 @@
-import React, {FC} from "react";
+import React, { FC } from "react";
 
 import styled from "styled-components";
 
-import {useTypedSelector} from "../../store/utils";
-import {useNavigate} from "react-router-dom"
-
-interface ButtonProps {
-    isActive: boolean;
-    isLocked: boolean;
-}
+import { useTypedSelector } from "../../store/utils";
+import { useNavigate } from "react-router-dom";
 
 export const AppFooter: FC = () => {
-    const navigationState = useTypedSelector(state => state.navigationReducer);
+  const navigationState = useTypedSelector(state => state.navigationReducer);
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  const currentIdx = navigationState.pages.findIndex(page => page.url === navigationState.currentPage);
 
-    let currentIdx = navigationState.pages.findIndex(page => page.url === navigationState.currentPage)
-
-    const elements = navigationState.pages.map((element, idx) => {
-        let isActive: boolean;
-        let isLocked: boolean;
-
-        isLocked = idx > currentIdx;
-        isActive = idx === currentIdx;
-
-        return (
-            <Li key={element.id}>
-                <Circle
-                    onClick={() => navigate(element.url)}
-                    isActive={isActive}
-                    isLocked={isLocked}/>
-            </Li>
-
-        );
-    });
+  const elements = navigationState.pages.map((element, idx) => {
+    const isLocked = idx > currentIdx;
+    const isActive = idx === currentIdx;
 
     return (
-        <footer>
-            <nav>
-                <Ul>
-                    {elements}
-                </Ul>
-            </nav>
-        </footer>
+      <Li key={element.id}>
+        <Circle
+          onClick={() => navigate(element.url)}
+          isActive={isActive}
+          isLocked={isLocked} />
+      </Li>
     );
+  });
+
+  return (
+    <footer>
+      <nav>
+        <Ul>
+          {elements}
+        </Ul>
+      </nav>
+    </footer>
+  );
 };
 
 const Ul = styled.ul`
@@ -62,6 +52,11 @@ const Li = styled.li`
   line-height: 0;
 `;
 
+interface ButtonProps {
+  isActive: boolean;
+  isLocked: boolean;
+}
+
 const Circle = styled.button<ButtonProps>`
   height: 30px;
   width: 30px;
@@ -71,19 +66,21 @@ const Circle = styled.button<ButtonProps>`
   background-color: #E25608;
   cursor: pointer;
   transition: 1s all;
+
   &:hover {
     transform: scale(1.1);
     box-shadow: 0 0 20px #E25608;
   }
+
   ${props => (props.isActive) ? `
-  background-color: #3FA7AE;
-  transform: scale(1.15);
-  box-shadow: 0 0 20px #3FA7AE;
-  ` : `
-  background-color: #E25608;
+    background-color: #3FA7AE;
+    transform: scale(1.15);
+    box-shadow: 0 0 20px #3FA7AE;
+    ` : `
+    background-color: #E25608;
   `};
-  ${props => (props.isLocked) ? `
-  background-color: #A2A2A2;
-  pointer-events: none;
-  ` : ``};
+  ${props => (props.isLocked) && `
+    background-color: #A2A2A2;
+    pointer-events: none;
+  `};
 `;

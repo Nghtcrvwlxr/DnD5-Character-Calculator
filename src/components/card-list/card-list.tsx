@@ -1,49 +1,44 @@
-import React, {FC} from "react";
-
+import React, { FC } from "react";
 import styled from "styled-components";
 
-import {useTypedDispatch} from "../../store/utils";
-
-import {selectField} from "../../store/slices/calculator-slice";
-
-import {Race, Class, Background} from "../../utils/types";
+import { selectField } from "../../store/slices/calculator-slice";
+import { useTypedDispatch } from "../../store/utils";
+import { Background, Class, Race } from "../../utils/types";
+import cardImage from "./sample_card_image.jpg";
 
 type Data = Race[] | Class[] | Background[];
 
 interface CardListProps {
-    data: Data;
-    fieldKey: string;
-    currentField: string;
-    showInfo: boolean;
+  data: Data;
+  fieldKey: string;
+  currentField: string;
+  showInfo: boolean;
 }
 
-export const CardList: FC<CardListProps> = (props) => {
-    const dispatch = useTypedDispatch();
+export const CardList: FC<CardListProps> = props => {
+  const dispatch = useTypedDispatch();
 
-    const cardImage = require('./sample_card_image.jpg');
-
-    const elements = props.data.map(item => {
-        return (
-            <Card
-                key={item.index}
-                selectedField={props.currentField}
-                label={item.name}
-                onClick={() => dispatch(selectField({field: props.fieldKey, name: item.name}))}>
-                <Img src={cardImage} alt="card"/>
-                <Span>{item.name}</Span>
-            </Card>
-        );
-    });
+  const elements = props.data.map(item => {
     return (
-        <CardsWrapper showInfo={props.showInfo}>
-            {elements}
-        </CardsWrapper>
+      <Card
+        key={item.index}
+        selectedField={props.currentField}
+        label={item.name}
+        onClick={() =>
+          dispatch(selectField({ field: props.fieldKey, name: item.name }))
+        }
+      >
+        <Img src={cardImage} alt="card" />
+        <Span>{item.name}</Span>
+      </Card>
     );
+  });
+  return <CardsWrapper showInfo={props.showInfo}>{elements}</CardsWrapper>;
 };
 
 interface CardProps {
-    selectedField: string;
-    label: string;
+  selectedField: string;
+  label: string;
 }
 
 const Card = styled.button<CardProps>`
@@ -57,12 +52,16 @@ const Card = styled.button<CardProps>`
   color: white;
   cursor: pointer;
   transition: 0.5s all;
+
   &:hover {
     transform: scale(1.1);
-    border: 1px solid #E25608;
-    box-shadow: 0 0 25px #E25608;
-  };
-  ${props => (props.selectedField === props.label) ? `
+    border: 1px solid #e25608;
+    box-shadow: 0 0 25px #e25608;
+  }
+
+  ${props =>
+    props.selectedField === props.label &&
+    `
     transform: scale(1.15);
     border: 1px solid #3FA7AE;
     box-shadow: 0 0 25px #3FA7AE;
@@ -76,7 +75,7 @@ const Card = styled.button<CardProps>`
         border: 1px solid #3FA7AE;
         box-shadow: 0 0 25px #3FA7AE;
     };
-  ` : ``};
+  `};
 `;
 
 const Img = styled.img`
@@ -95,17 +94,22 @@ const Span = styled.span`
 `;
 
 interface CardsWrapperProps {
-    showInfo: boolean;
+  showInfo: boolean;
 }
 
 const CardsWrapper = styled.div<CardsWrapperProps>`
   display: grid;
-  grid-template: repeat(3, minmax(max-content, max-content)) / repeat(3, minmax(max-content, max-content));
+  grid-template: repeat(3, minmax(max-content, max-content)) / repeat(
+      3,
+      minmax(max-content, max-content)
+    );
   grid-auto-flow: column;
   grid-auto-columns: minmax(max-content, max-content);
   gap: 40px;
   transition: 1s all;
-  ${props => (props.showInfo) ? `
+  ${props =>
+    props.showInfo &&
+    `
     margin-right: 40vw;
-  ` : ``};
+  `};
 `;
