@@ -13,6 +13,13 @@ export interface Background {
     name: string;
 }
 
+export interface Attribute {
+    index: string;
+    name: string;
+    value: number;
+    modifier: string;
+}
+
 interface CardPageProps {
     fieldKey: string;
     fetchData?: Function;

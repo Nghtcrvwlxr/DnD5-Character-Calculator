@@ -1,6 +1,6 @@
 import {dataError, dataLoaded, dataRequested} from "../store/slices/service-slice";
 
-import {Race, Class, Background} from "../utils/types";
+import {Race, Class, Background, Attribute} from "../utils/types";
 import {AppDispatch} from "../store/store";
 
 export default class TestService {
@@ -145,6 +145,45 @@ export default class TestService {
         }
     ];
 
+    _attributes: Attribute[] = [
+        {
+            index: 'str',
+            name: 'Strength',
+            value: 8,
+            modifier: '-1'
+        },
+        {
+            index: 'dex',
+            name: 'Dexterity',
+            value: 8,
+            modifier: '-1'
+        },
+        {
+            index: 'con',
+            name: 'Constitution',
+            value: 8,
+            modifier: '-1'
+        },
+        {
+            index: 'int',
+            name: 'Intelligence',
+            value: 8,
+            modifier: '-1'
+        },
+        {
+            index: 'wis',
+            name: 'Wisdom',
+            value: 8,
+            modifier: '-1'
+        },
+        {
+            index: 'chr',
+            name: 'Charisma',
+            value: 8,
+            modifier: '-1'
+        }
+    ];
+
     getRaces(): Promise<Race[]>  {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -178,6 +217,17 @@ export default class TestService {
             }, 1000);
         });
     };
+    getAttributes(): Promise<Attribute[]>  {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (Math.random() > 0.75) {
+                    reject(new Error('Something bad happened'));
+                } else {
+                    resolve(this._attributes)
+                }
+            }, 1000);
+        });
+    };
 
     fetchRaces = (dispatch: AppDispatch) => {
         dispatch(dataRequested());
@@ -188,13 +238,19 @@ export default class TestService {
     fetchClasses = (dispatch: AppDispatch) => {
         dispatch(dataRequested());
         this.getClasses()
-            .then((data: Race[]) => dispatch(dataLoaded(data)))
+            .then((data: Class[]) => dispatch(dataLoaded(data)))
             .catch(() => dispatch(dataError()));
     };
     fetchBackgrounds = (dispatch: AppDispatch) => {
         dispatch(dataRequested());
         this.getBackgrounds()
-            .then((data: Race[]) => dispatch(dataLoaded(data)))
+            .then((data: Background[]) => dispatch(dataLoaded(data)))
+            .catch(() => dispatch(dataError()));
+    };
+    fetchAttributes = (dispatch: AppDispatch) => {
+        dispatch(dataRequested());
+        this.getAttributes()
+            .then((data: Attribute[]) => dispatch(dataLoaded(data)))
             .catch(() => dispatch(dataError()));
     };
 }
