@@ -17,7 +17,7 @@ export interface Attribute {
     index: string;
     name: string;
     value: number;
-    modifier: string;
+    modifier: number;
 }
 
 interface CardPageProps {

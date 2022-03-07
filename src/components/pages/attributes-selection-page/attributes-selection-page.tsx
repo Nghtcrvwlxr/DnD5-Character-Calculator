@@ -4,10 +4,9 @@ import styled from "styled-components";
 
 import {Service} from "../../service-context/service-context";
 
-import {hideInformation} from "../../../store/slices/calculator-slice";
-
 import {useTypedDispatch, useTypedSelector} from "../../../store/utils";
 import {getNextPage, updateCurrentPage} from "../../../store/slices/navigation-slice";
+import {hideInformation} from "../../../store/slices/calculator-slice";
 
 import {AttributesListContainer} from "../../attributes-list/attributes-list-container";
 
@@ -78,5 +77,3 @@ const Sheet = styled.div<InformationSheetProps>`
     transform: translateX(100%);
   `};
 `;
-
-

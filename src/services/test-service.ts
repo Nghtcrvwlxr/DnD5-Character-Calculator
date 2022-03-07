@@ -147,40 +147,40 @@ export default class TestService {
 
     _attributes: Attribute[] = [
         {
-            index: 'str',
-            name: 'Strength',
-            value: 8,
-            modifier: '-1'
+            "index": "str",
+            "name": "Strength",
+            "value": 8,
+            "modifier": -1
         },
         {
-            index: 'dex',
-            name: 'Dexterity',
-            value: 8,
-            modifier: '-1'
+            "index": 'dex',
+            "name": 'Dexterity',
+            "value": 8,
+            "modifier": -1
         },
         {
-            index: 'con',
-            name: 'Constitution',
-            value: 8,
-            modifier: '-1'
+            "index": 'con',
+            "name": 'Constitution',
+            "value": 8,
+            "modifier": -1
         },
         {
-            index: 'int',
-            name: 'Intelligence',
-            value: 8,
-            modifier: '-1'
+            "index": 'int',
+            "name": 'Intelligence',
+            "value": 8,
+            "modifier": -1
         },
         {
-            index: 'wis',
-            name: 'Wisdom',
-            value: 8,
-            modifier: '-1'
+            "index": 'wis',
+            "name": 'Wisdom',
+            "value": 8,
+            "modifier": -1
         },
         {
-            index: 'chr',
-            name: 'Charisma',
-            value: 8,
-            modifier: '-1'
+            "index": 'chr',
+            "name": 'Charisma',
+            "value": 8,
+            "modifier": -1
         }
     ];
 

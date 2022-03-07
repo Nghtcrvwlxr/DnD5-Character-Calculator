@@ -1,10 +1,12 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {Attribute} from "../../utils/types";
 
 interface CalculatorState {
     showInfo: boolean;
     race: string;
     class: string;
     background: string;
+    attributes: Attribute[];
 }
 
 const initialState: CalculatorState = {
@@ -12,12 +14,16 @@ const initialState: CalculatorState = {
     "race": '',
     "class": '',
     "background": '',
+    attributes: [],
 };
 
 const calculatorSlice = createSlice({
     name: 'calculatorReducer',
     initialState,
     reducers: {
+        toggleInformation(state) {
+            state.showInfo = !state.showInfo;
+        },
         hideInformation(state) {
             state.showInfo = false;
         },
@@ -30,12 +36,17 @@ const calculatorSlice = createSlice({
             // @ts-ignore
             state[action.payload] = '';
         },
+        setAttributes(state, action: PayloadAction<Attribute[]>) {
+            state.attributes = action.payload;
+        },
     }
 });
 
 export const {reducer: calculatorReducer} = calculatorSlice;
 
 export const {
+    toggleInformation,
     hideInformation,
     selectField,
-    clearField} = calculatorSlice.actions;
+    clearField,
+    setAttributes} = calculatorSlice.actions;

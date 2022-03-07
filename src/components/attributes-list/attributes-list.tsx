@@ -1,55 +1,63 @@
-import React, {FC} from "react";
+import React, {FC, useEffect} from "react";
 import {Link} from "react-router-dom";
 
 import styled from "styled-components";
 
-import {useTypedSelector} from "../../store/utils";
+import {useTypedDispatch, useTypedSelector} from "../../store/utils";
+import {loadData, toggleLevel, calculateRemainingPoints} from "../../store/slices/attributes-slice";
+import {toggleInformation, setAttributes} from "../../store/slices/calculator-slice";
+
+import {AttributesListItem} from "../attributes-list-item/attributes-list-item";
 
 import {Attribute} from "../../utils/types";
 
 interface AttributesListProps {
     data: Attribute[];
+    showInfo: boolean;
 }
 
 export const AttributesList: FC<AttributesListProps> = (props) => {
+    const dispatch = useTypedDispatch();
     const nextPageURL = useTypedSelector(state => state.navigationReducer.nextPage);
-    const showInfo = useTypedSelector(state => state.calculatorReducer.showInfo);
+    const state = useTypedSelector(state => state.attributesReducer);
 
-    const elements = props.data.map(item => {
+    useEffect(() => {
+        dispatch(loadData(props.data));
+    }, [dispatch, props.data]);
+
+    useEffect(() => {
+        dispatch(calculateRemainingPoints());
+    }, [dispatch, state.level]);
+
+    const elements = state.data.map(item => {
         return (
-            <TableItem key={item.index}>
-                <InputBlock>
-                    <Button>
-                        <span>{'<'}</span>
-                    </Button>
-                    <Input value={item.value} readOnly/>
-                    <Button>
-                        <span>{'>'}</span>
-                    </Button>
-                </InputBlock>
-                <Divider/>
-                <Span>{item.name}</Span>
-                <Divider/>
-                <span>{item.modifier}</span>
-            </TableItem>
+            <AttributesListItem key={item.index} {...item}/>
         );
     });
 
     return (
-        <TableWrapper showInfo={showInfo}>
-            <LevelBlock>
-                <span>Level</span>
-                <Divider/>
-                <InputBlock>
-                    <Button>
-                        <span>{'<'}</span>
-                    </Button>
-                    <Input value={1} readOnly/>
-                    <Button>
-                        <span>{'>'}</span>
-                    </Button>
-                </InputBlock>
-            </LevelBlock>
+        <TableWrapper showInfo={props.showInfo}>
+            <TableInfoWrapper>
+                <TopBlock>
+                    <span>Level</span>
+                    <Divider/>
+                    <InputBlock>
+                        <Button onClick={() => {dispatch(toggleLevel('dec'))}}>
+                            <span>{'<'}</span>
+                        </Button>
+                        <Input value={state.level} readOnly/>
+                        <Button onClick={() => {dispatch(toggleLevel('inc'))}}>
+                            <span>{'>'}</span>
+                        </Button>
+                    </InputBlock>
+                </TopBlock>
+
+                <TopBlock>
+                    <span>Remaining points:</span>
+                    <Divider/>
+                    <span>{state.remainingPoints}</span>
+                </TopBlock>
+            </TableInfoWrapper>
 
             <TableHeader>
                 <span>Value</span>
@@ -62,8 +70,8 @@ export const AttributesList: FC<AttributesListProps> = (props) => {
             {elements}
 
             <ButtonsWrapper>
-                <InfoButton>info</InfoButton>
-                <SelectButton to={nextPageURL}>select</SelectButton>
+                <InfoButton onClick={() => dispatch(toggleInformation())}>info</InfoButton>
+                <SelectButton to={nextPageURL} onClick={() => dispatch(setAttributes(state.data))}>select</SelectButton>
             </ButtonsWrapper>
         </TableWrapper>
     );
@@ -84,6 +92,11 @@ const TableWrapper = styled.div<TableWrapperProps>`
   ` : ``};
 `;
 
+const TableInfoWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+
 const TableBlock = styled.div`
   background: white;
   border: 1px solid black;
@@ -94,9 +107,8 @@ const TableBlock = styled.div`
   text-align: center;
 `;
 
-const LevelBlock = styled(TableBlock)`
+const TopBlock = styled(TableBlock)`
   height: 50px;
-  margin: 0 auto;
   grid-template-columns: 150px min-content 150px;
   font-size: 18px;
 `;
@@ -104,11 +116,6 @@ const LevelBlock = styled(TableBlock)`
 const TableHeader = styled(TableBlock)`
   grid-template-columns: minmax(100px, 150px) min-content minmax(400px, auto) min-content minmax(100px, 150px);
   font-size: 18px;
-`;
-
-const TableItem = styled(TableBlock)`
-  grid-template-columns: minmax(100px, 150px) min-content minmax(400px, auto) min-content minmax(100px, 150px);
-  font-size: 24px;
 `;
 
 const Divider = styled.div`
@@ -148,12 +155,6 @@ const Input = styled.input`
   width: 50px;
   border: 1px solid black;
   border-radius: 3px;
-
-`;
-
-const Span = styled.span`
-  text-align: start;
-  padding-left: 3rem;
 `;
 
 const ButtonsWrapper = styled.div`

@@ -10,6 +10,7 @@ import {ErrorIndicator} from "../error-indicator/error-indicator";
 
 export const AttributesListContainer: FC = () => {
     const state = useTypedSelector(state => state.serviceReducer);
+    const showInfo = useTypedSelector(state => state.calculatorReducer.showInfo);
 
     if (state.loading) {
         return (
@@ -26,7 +27,8 @@ export const AttributesListContainer: FC = () => {
         );
     }
 
-    return <AttributesList data={state.data}/>
+    return <AttributesList data={state.data}
+                           showInfo={showInfo}/>
 };
 
 const LoadingWrapper = styled.div`
