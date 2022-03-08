@@ -34,9 +34,12 @@ const serviceSlice = createSlice({
                 error: true,
             };
         },
+        dataCleared(state) {
+            state.data = [];
+        }
     }
 });
 
 export const {reducer: serviceReducer} = serviceSlice;
 
-export const {dataRequested, dataLoaded, dataError} = serviceSlice.actions;
+export const {dataRequested, dataLoaded, dataError, dataCleared} = serviceSlice.actions;

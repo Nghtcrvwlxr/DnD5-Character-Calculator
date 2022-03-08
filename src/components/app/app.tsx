@@ -34,5 +34,6 @@ export const App: FC = () => {
 };
 
 const Main = styled.main`
+  position: relative;
   flex: 1 0 auto;
 `;

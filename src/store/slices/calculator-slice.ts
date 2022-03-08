@@ -32,10 +32,6 @@ const calculatorSlice = createSlice({
             state[action.payload.field] = action.payload.name;
             state.showInfo = true;
         },
-        clearField(state, action: PayloadAction<string>) {
-            // @ts-ignore
-            state[action.payload] = '';
-        },
         setAttributes(state, action: PayloadAction<Attribute[]>) {
             state.attributes = action.payload;
         },
@@ -48,5 +44,4 @@ export const {
     toggleInformation,
     hideInformation,
     selectField,
-    clearField,
     setAttributes} = calculatorSlice.actions;

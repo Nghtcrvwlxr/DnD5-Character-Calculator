@@ -187,7 +187,7 @@ export default class TestService {
     getRaces(): Promise<Race[]>  {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (Math.random() > 0.75) {
+                if (Math.random() > 0.95) {
                     reject(new Error('Something bad happened'));
                 } else {
                     resolve(this._races)
@@ -198,7 +198,7 @@ export default class TestService {
     getClasses(): Promise<Class[]>  {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (Math.random() > 0.75) {
+                if (Math.random() > 0.95) {
                     reject(new Error('Something bad happened'));
                 } else {
                     resolve(this._classes)
@@ -209,7 +209,7 @@ export default class TestService {
     getBackgrounds(): Promise<Background[]>  {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (Math.random() > 0.75) {
+                if (Math.random() > 0.95) {
                     reject(new Error('Something bad happened'));
                 } else {
                     resolve(this._backgrounds)
@@ -220,7 +220,7 @@ export default class TestService {
     getAttributes(): Promise<Attribute[]>  {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (Math.random() > 0.75) {
+                if (Math.random() > 0.95) {
                     reject(new Error('Something bad happened'));
                 } else {
                     resolve(this._attributes)
