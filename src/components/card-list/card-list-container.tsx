@@ -7,10 +7,11 @@ import {useTypedSelector} from "../../store/utils";
 import {CardList} from "./card-list";
 import {LoadingIndicator} from "../loading-indicator/loading-indicator";
 import {ErrorIndicator} from "../error-indicator/error-indicator";
+import {Race, Class, Background} from "../../utils/types";
 
 interface CardListContainerProps {
-    fieldKey: string
-    currentField: string;
+    fieldKey: string;
+    currentField: Race | Class | Background;
 }
 
 export const CardListContainer: FC<CardListContainerProps> = (props) => {

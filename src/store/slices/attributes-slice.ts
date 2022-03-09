@@ -3,6 +3,7 @@ import {Attribute} from "../../utils/types";
 
 interface AttributesState {
     initialData: Attribute[];
+    initialRemainingPoints: number;
     data: Attribute[];
     level: number;
     remainingPoints: number;
@@ -11,9 +12,10 @@ interface AttributesState {
 
 const initialState: AttributesState = {
     initialData: [],
+    initialRemainingPoints: 27,
     data: [],
     level: 1,
-    remainingPoints: 0,
+    remainingPoints: 27,
     currentField: '',
 };
 
@@ -36,8 +38,25 @@ const attributesSlice = createSlice({
             }
         },
         calculateRemainingPoints(state) {
-            const bonusPoints = (Math.floor(state.level / 4)) * 2;
-            state.remainingPoints = 27 + bonusPoints;
+            const bonusPoints = (Math.floor(state.level / 4) * 2);
+            state.remainingPoints = state.initialRemainingPoints + bonusPoints;
+        },
+        calculateBonusPoints(state, action) {
+            state.data.forEach(attr => {
+                for (let key in action.payload.bonusStats) {
+                    if (key === attr.index) {
+                        attr.value += action.payload.bonusStats[key];
+                    }
+                }
+                attr.modifier = Math.floor((attr.value / 2) - 5);
+            });
+            for (let key in action.payload.bonusStats) {
+                if (key === 'unset') {
+                    state.remainingPoints += action.payload.bonusStats[key];
+                }
+            }
+            state.initialData = state.data;
+            state.initialRemainingPoints = state.remainingPoints;
         },
         addAttribute(state, action: PayloadAction<string>) {
             const index = state.data.findIndex(item => item.index === action.payload);
@@ -51,7 +70,7 @@ const attributesSlice = createSlice({
         removeAttribute(state, action: PayloadAction<string>) {
             const index = state.data.findIndex(item => item.index === action.payload);
             const pointCost = Math.floor((state.data[index].value) / 7);
-            if (state.data[index].value > 8) {
+            if (state.data[index].value > state.initialData[index].value) {
                 state.data[index].value = state.data[index].value - 1;
                 state.remainingPoints = state.remainingPoints + pointCost;
                 state.data[index].modifier = Math.floor((state.data[index].value / 2) - 5);
@@ -65,4 +84,12 @@ const attributesSlice = createSlice({
 
 export const {reducer: attributesReducer} = attributesSlice;
 
-export const {loadData, toggleLevel, calculateRemainingPoints, addAttribute, removeAttribute, selectField} = attributesSlice.actions;
+export const {
+    loadData,
+    toggleLevel,
+    calculateRemainingPoints,
+    calculateBonusPoints,
+    addAttribute,
+    removeAttribute,
+    selectField
+} = attributesSlice.actions;

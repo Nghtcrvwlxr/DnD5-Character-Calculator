@@ -8,38 +8,47 @@ export default class TestService {
         {
             "index": "dragonborn",
             "name": "Dragonborn",
+            "bonusStats": {str: 2, chr: 1},
         },
         {
             "index": "dwarf",
             "name": "Dwarf",
+            "bonusStats": {con: 2},
         },
         {
             "index": "elf",
             "name": "Elf",
+            "bonusStats": {dex: 2},
         },
         {
             "index": "gnome",
             "name": "Gnome",
+            "bonusStats": {int: 2},
         },
         {
             "index": "half-elf",
             "name": "Half-Elf",
+            "bonusStats": {chr: 2, unset: 2},
         },
         {
             "index": "half-orc",
             "name": "Half-Orc",
+            "bonusStats": {str: 2, con: 1},
         },
         {
             "index": "halfling",
             "name": "Halfling",
+            "bonusStats": {dex: 2},
         },
         {
             "index": "human",
             "name": "Human",
+            "bonusStats": {str: 1, dex: 1, con: 1, int: 1, wis: 1, chr: 1},
         },
         {
             "index": "tiefling",
             "name": "Tiefling",
+            "bonusStats": {chr: 2, int: 1},
         }
     ];
 

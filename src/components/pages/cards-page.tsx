@@ -12,7 +12,11 @@ import {getNextPage, updateCurrentPage} from "../../store/slices/navigation-slic
 import {CardListContainer} from "../card-list/card-list-container";
 import {InformationSheet} from "../information-sheet/information-sheet";
 
-import {CardPageProps} from "../../utils/types";
+interface CardPageProps {
+    fieldKey: string;
+    fetchData: Function;
+    label: string;
+}
 
 export const CardsPage: FC<CardPageProps> = ({fieldKey, fetchData, label}) => {
     const dispatch = useTypedDispatch();
@@ -41,8 +45,8 @@ export const CardsPage: FC<CardPageProps> = ({fieldKey, fetchData, label}) => {
 
                 <InformationSheet isShown={showInfo}>
                     <Description>
-                        <h3>{currentField}</h3>
-                        <h5>{currentField} description:</h5>
+                        <h3>{currentField.name}</h3>
+                        <h5>{currentField.name} description:</h5>
                         <span>
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci amet architecto at deleniti dolor ducimus eaque ex, facere fugit harum id inventore necessitatibus nemo numquam quaerat quos rerum sint, veritatis.
                         </span>

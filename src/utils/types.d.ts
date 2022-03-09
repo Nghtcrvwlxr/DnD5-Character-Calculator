@@ -1,6 +1,7 @@
 export interface Race {
     index: string;
     name: string;
+    bonusStats: object;
 }
 
 export interface Class {
@@ -18,10 +19,4 @@ export interface Attribute {
     name: string;
     value: number;
     modifier: number;
-}
-
-interface CardPageProps {
-    fieldKey: string;
-    fetchData?: Function;
-    label?: string;
 }

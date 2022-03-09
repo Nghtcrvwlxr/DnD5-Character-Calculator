@@ -3,17 +3,17 @@ import {Attribute} from "../../utils/types";
 
 interface CalculatorState {
     showInfo: boolean;
-    race: string;
-    class: string;
-    background: string;
+    race: any;
+    class: any;
+    background: any;
     attributes: Attribute[];
 }
 
 const initialState: CalculatorState = {
     showInfo: false,
-    "race": '',
-    "class": '',
-    "background": '',
+    "race": {},
+    "class": {},
+    "background": {},
     attributes: [],
 };
 
@@ -27,9 +27,9 @@ const calculatorSlice = createSlice({
         hideInformation(state) {
             state.showInfo = false;
         },
-        selectField(state, action: PayloadAction<{field: any, name: string}>) {
+        selectField(state, action: PayloadAction<{field: any, item: object}>) {
             // @ts-ignore
-            state[action.payload.field] = action.payload.name;
+            state[action.payload.field] = action.payload.item;
             state.showInfo = true;
         },
         setAttributes(state, action: PayloadAction<Attribute[]>) {

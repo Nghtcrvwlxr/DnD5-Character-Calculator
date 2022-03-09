@@ -13,7 +13,7 @@ type Data = Race[] | Class[] | Background[];
 interface CardListProps {
     data: Data;
     fieldKey: string;
-    currentField: string;
+    currentField: Race | Class | Background;
     showInfo: boolean;
 }
 
@@ -28,7 +28,7 @@ export const CardList: FC<CardListProps> = (props) => {
                 key={item.index}
                 selectedField={props.currentField}
                 label={item.name}
-                onClick={() => dispatch(selectField({field: props.fieldKey, name: item.name}))}>
+                onClick={() => dispatch(selectField({field: props.fieldKey, item: item}))}>
                 <Img src={cardImage} alt="card"/>
                 <Span>{item.name}</Span>
             </Card>
@@ -42,7 +42,7 @@ export const CardList: FC<CardListProps> = (props) => {
 };
 
 interface CardProps {
-    selectedField: string;
+    selectedField: any;
     label: string;
 }
 
@@ -62,7 +62,7 @@ const Card = styled.button<CardProps>`
     border: 1px solid #E25608;
     box-shadow: 0 0 25px #E25608;
   };
-  ${props => (props.selectedField === props.label) ? `
+  ${props => (props.selectedField.name === props.label) ? `
     transform: scale(1.15);
     border: 1px solid #3FA7AE;
     box-shadow: 0 0 25px #3FA7AE;

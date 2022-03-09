@@ -17,9 +17,9 @@ export const App: FC = () => {
             <Main>
                 <Routes>
                     <Route path="/" element={<Navigate to='/race-selection'/>}/>
-                    <Route path="/race-selection" element={<RaceSelectionPage fieldKey={'race'}/>}/>
-                    <Route path="/class-selection" element={<ClassSelectionPage fieldKey={'class'}/>}/>
-                    <Route path="/background-selection" element={<BackgroundSelectionPage fieldKey={'background'}/>}/>
+                    <Route path="/race-selection" element={<RaceSelectionPage/>}/>
+                    <Route path="/class-selection" element={<ClassSelectionPage/>}/>
+                    <Route path="/background-selection" element={<BackgroundSelectionPage/>}/>
                     <Route path="/stats-selection" element={<AttributesSelectionPage/>}/>
                     <Route path="/proficiencies-selection" element={<h3 style={{textAlign: 'center'}}>Proficiencies selection page</h3>}/>
                     <Route path="/equipment-selection" element={<h3 style={{textAlign: 'center'}}>Equipment selection page</h3>}/>

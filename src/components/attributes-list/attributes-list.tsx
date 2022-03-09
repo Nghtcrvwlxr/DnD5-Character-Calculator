@@ -3,7 +3,12 @@ import React, {FC, useEffect} from "react";
 import styled from "styled-components";
 
 import {useTypedDispatch, useTypedSelector} from "../../store/utils";
-import {loadData, toggleLevel, calculateRemainingPoints} from "../../store/slices/attributes-slice";
+import {
+    loadData,
+    toggleLevel,
+    calculateRemainingPoints,
+    calculateBonusPoints
+} from "../../store/slices/attributes-slice";
 
 import {AttributesListItem} from "../attributes-list-item/attributes-list-item";
 
@@ -17,6 +22,7 @@ interface AttributesListProps {
 export const AttributesList: FC<AttributesListProps> = (props) => {
     const dispatch = useTypedDispatch();
     const state = useTypedSelector(state => state.attributesReducer);
+    const selectedRace = useTypedSelector(state => state.calculatorReducer.race);
 
     useEffect(() => {
         dispatch(loadData(props.data));
@@ -26,9 +32,13 @@ export const AttributesList: FC<AttributesListProps> = (props) => {
         dispatch(calculateRemainingPoints());
     }, [dispatch, state.level]);
 
+    useEffect(() => {
+        dispatch(calculateBonusPoints(selectedRace))
+    }, [dispatch, selectedRace]);
+
     const elements = state.data.map(item => {
         return (
-            <AttributesListItem key={item.index} {...item}/>
+            <AttributesListItem key={item.index} {...item} bonuses={selectedRace.bonusStats}/>
         );
     });
 

@@ -1,40 +1,58 @@
-import React, {FC} from "react";
+import React, {FC, useState} from "react";
 
 import styled from "styled-components";
 
 import {useTypedDispatch} from "../../store/utils";
 import {addAttribute, removeAttribute, selectField} from "../../store/slices/attributes-slice";
+import {toggleInformation} from "../../store/slices/calculator-slice";
 
 interface AttributesListItemProps {
     index: string;
     name: string;
     value: number;
     modifier: number;
+    bonuses: {};
 }
 
 export const AttributesListItem: FC<AttributesListItemProps> = (props) => {
     const dispatch = useTypedDispatch();
+    const [visible, setVisible] = useState(false);
+    let highlight: boolean = false;
+
+    for (let key in props.bonuses) {
+        if (key === props.index) {
+            highlight = true;
+        }
+    }
 
     return (
-        <TableItem key={props.index} onMouseEnter={() => dispatch(selectField(props.name))}>
+        <TableItem key={props.index} onMouseEnter={() => dispatch(selectField(props.name))} onMouseOver={() => setVisible(!visible)} onMouseOut={() => setVisible(!visible)}>
             <InputBlock>
                 <Button onClick={() => dispatch(removeAttribute(props.index))}>
                     <span>{'<'}</span>
                 </Button>
-                <Input value={props.value} readOnly/>
+                <Input value={props.value} highlight={highlight} readOnly/>
                 <Button onClick={() => dispatch(addAttribute(props.index))}>
                     <span>{'>'}</span>
                 </Button>
             </InputBlock>
+
             <Divider/>
-            <Span>{props.name}</Span>
+
+            <Span highlight={highlight}>{props.name}</Span>
+            <InfoBtn isVisible={visible} onClick={() => dispatch(toggleInformation())}>
+                <span>?</span>
+            </InfoBtn>
+
             <Divider/>
+
             <span>{props.modifier}</span>
         </TableItem>
     );
 };
 
 const TableBlock = styled.div`
+  position: relative;
   box-sizing: content-box;
   background: white;
   border: 1px solid black;
@@ -62,7 +80,7 @@ const Divider = styled.div`
 
 const InputBlock = styled.div`
   display: flex;
-  justify-content: center; 
+  justify-content: center;
 `;
 
 const Button = styled.button`
@@ -85,15 +103,50 @@ const Button = styled.button`
   };
 `;
 
-const Input = styled.input`
+interface InputProps {
+    highlight: boolean;
+}
+
+const Input = styled.input<InputProps>`
   text-align: center;
   margin: 0 5px;
   width: 50px;
   border: 1px solid black;
   border-radius: 3px;
+  ${props => (props.highlight) && `color: #E25608;`}
 `;
 
-const Span = styled.span`
+interface SpanProps {
+    highlight: boolean;
+}
+
+const Span = styled.span<SpanProps>`
   text-align: start;
   padding-left: 3rem;
+  ${props => (props.highlight) && `color: #E25608;`}
+`;
+
+interface InfoBtnProps {
+    isVisible: boolean;
+}
+
+const InfoBtn = styled.button<InfoBtnProps>`
+  position: absolute;
+  font-size: 20px;
+  line-height: 20px;
+  text-align: center;
+  height: 30px;
+  width: 30px;
+  border: none;
+  border-radius: 100%;
+  background-color: lightgray;
+  right: 20%;
+  transition: 0.5s all;
+  &:hover {
+    transform: scale(1.1);
+  };
+  &:active {
+    transform: scale(0.9);
+  };
+  ${props => (props.isVisible) ? `display: block` : `display: none`};
 `;
