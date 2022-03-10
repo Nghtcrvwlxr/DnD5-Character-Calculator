@@ -23,14 +23,15 @@ export const AttributesList: FC<AttributesListProps> = (props) => {
     const dispatch = useTypedDispatch();
     const state = useTypedSelector(state => state.attributesReducer);
     const selectedRace = useTypedSelector(state => state.calculatorReducer.race);
+    const selectedClass = useTypedSelector(state => state.calculatorReducer.class);
 
     useEffect(() => {
         dispatch(loadData(props.data));
     }, [dispatch, props.data]);
 
     useEffect(() => {
-        dispatch(calculateRemainingPoints());
-    }, [dispatch, state.level]);
+        dispatch(calculateRemainingPoints(selectedClass));
+    }, [dispatch, state.level, selectedClass]);
 
     useEffect(() => {
         dispatch(calculateBonusPoints(selectedRace))

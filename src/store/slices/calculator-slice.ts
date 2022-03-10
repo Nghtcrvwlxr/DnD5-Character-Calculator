@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Attribute} from "../../utils/types";
 
-interface CalculatorState {
+interface CalculatorState extends Record<string, any>{
     showInfo: boolean;
     race: any;
     class: any;
@@ -11,9 +11,9 @@ interface CalculatorState {
 
 const initialState: CalculatorState = {
     showInfo: false,
-    "race": {},
-    "class": {},
-    "background": {},
+    race: {},
+    class: {},
+    background: {},
     attributes: [],
 };
 
@@ -27,8 +27,7 @@ const calculatorSlice = createSlice({
         hideInformation(state) {
             state.showInfo = false;
         },
-        selectField(state, action: PayloadAction<{field: any, item: object}>) {
-            // @ts-ignore
+        selectField(state, action: PayloadAction<{field: string, item: object}>) {
             state[action.payload.field] = action.payload.item;
             state.showInfo = true;
         },

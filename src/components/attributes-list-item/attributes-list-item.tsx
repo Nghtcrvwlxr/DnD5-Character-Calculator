@@ -123,7 +123,7 @@ interface SpanProps {
 const Span = styled.span<SpanProps>`
   text-align: start;
   padding-left: 3rem;
-  ${props => (props.highlight) && `color: #E25608;`}
+  ${props => (props.highlight) && `color: #E25608;`};
 `;
 
 interface InfoBtnProps {

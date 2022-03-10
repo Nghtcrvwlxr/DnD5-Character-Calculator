@@ -1,20 +1,20 @@
-export interface Race {
+export interface Race extends Record<string, any> {
     index: string;
     name: string;
-    bonusStats: object;
+    bonusStats: Record<string, number>;
 }
 
-export interface Class {
-    index: string;
-    name: string;
-}
-
-export interface Background {
+export interface Class extends Record<string, any> {
     index: string;
     name: string;
 }
 
-export interface Attribute {
+export interface Background extends Record<string, any> {
+    index: string;
+    name: string;
+}
+
+export interface Attribute extends Record<string, any> {
     index: string;
     name: string;
     value: number;

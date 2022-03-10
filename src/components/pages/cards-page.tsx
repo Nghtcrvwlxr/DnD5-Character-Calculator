@@ -20,7 +20,7 @@ interface CardPageProps {
 
 export const CardsPage: FC<CardPageProps> = ({fieldKey, fetchData, label}) => {
     const dispatch = useTypedDispatch();
-    // @ts-ignore
+
     const currentField = useTypedSelector(state => state.calculatorReducer[fieldKey]);
     const showInfo = useTypedSelector(state => state.calculatorReducer.showInfo);
     const nextPageURL = useTypedSelector(state => state.navigationReducer.nextPage);

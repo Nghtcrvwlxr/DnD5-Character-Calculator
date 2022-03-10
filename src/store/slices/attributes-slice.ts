@@ -37,9 +37,16 @@ const attributesSlice = createSlice({
                 state.data = state.initialData;
             }
         },
-        calculateRemainingPoints(state) {
-            const bonusPoints = (Math.floor(state.level / 4) * 2);
-            state.remainingPoints = state.initialRemainingPoints + bonusPoints;
+        calculateRemainingPoints(state, action) {
+            const additionalPoints = 2;
+            let levels: number[] = [];
+            if(action.payload.index === 'fighter') {
+                levels = [4, 6, 8, 12, 14, 16, 19];
+            } else {
+                levels = [4, 8, 12, 16, 19];
+            }
+            const multiplier = levels.filter(level => state.level >= level).length;
+            state.remainingPoints = state.initialRemainingPoints + (additionalPoints * multiplier);
         },
         calculateBonusPoints(state, action) {
             state.data.forEach(attr => {
