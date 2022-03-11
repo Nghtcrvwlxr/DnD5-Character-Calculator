@@ -1,4 +1,5 @@
 import {dataError, dataLoaded, dataRequested} from "../store/slices/service-slice";
+import {attributesRequested, attributesLoaded, attributesError} from "../store/slices/attributes-slice";
 
 import {Race, Class, Background, Attribute} from "../utils/types";
 import {AppDispatch} from "../store/store";
@@ -196,7 +197,7 @@ export default class TestService {
     getRaces(): Promise<Race[]>  {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (Math.random() > 0.95) {
+                if (Math.random() > 0.99) {
                     reject(new Error('Something bad happened'));
                 } else {
                     resolve(this._races)
@@ -207,7 +208,7 @@ export default class TestService {
     getClasses(): Promise<Class[]>  {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (Math.random() > 0.95) {
+                if (Math.random() > 0.99) {
                     reject(new Error('Something bad happened'));
                 } else {
                     resolve(this._classes)
@@ -218,7 +219,7 @@ export default class TestService {
     getBackgrounds(): Promise<Background[]>  {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (Math.random() > 0.95) {
+                if (Math.random() > 0.99) {
                     reject(new Error('Something bad happened'));
                 } else {
                     resolve(this._backgrounds)
@@ -229,7 +230,7 @@ export default class TestService {
     getAttributes(): Promise<Attribute[]>  {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (Math.random() > 0.95) {
+                if (Math.random() > 0.99) {
                     reject(new Error('Something bad happened'));
                 } else {
                     resolve(this._attributes)
@@ -257,9 +258,9 @@ export default class TestService {
             .catch(() => dispatch(dataError()));
     };
     fetchAttributes = (dispatch: AppDispatch) => {
-        dispatch(dataRequested());
+        dispatch(attributesRequested());
         this.getAttributes()
-            .then((data: Attribute[]) => dispatch(dataLoaded(data)))
-            .catch(() => dispatch(dataError()));
+            .then((data: Attribute[]) => dispatch(attributesLoaded(data)))
+            .catch(() => dispatch(attributesError()));
     };
 }

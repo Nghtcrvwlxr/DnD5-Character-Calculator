@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 import {useTypedDispatch, useTypedSelector} from "../../store/utils";
 import {
-    loadData,
     toggleLevel,
     calculateRemainingPoints,
     calculateBonusPoints
@@ -26,18 +25,14 @@ export const AttributesList: FC<AttributesListProps> = (props) => {
     const selectedClass = useTypedSelector(state => state.calculatorReducer.class);
 
     useEffect(() => {
-        dispatch(loadData(props.data));
-    }, [dispatch, props.data]);
-
-    useEffect(() => {
         dispatch(calculateRemainingPoints(selectedClass));
     }, [dispatch, state.level, selectedClass]);
 
     useEffect(() => {
-        dispatch(calculateBonusPoints(selectedRace))
+        dispatch(calculateBonusPoints(selectedRace));
     }, [dispatch, selectedRace]);
 
-    const elements = state.data.map(item => {
+    const elements = props.data.map(item => {
         return (
             <AttributesListItem key={item.index} {...item} bonuses={selectedRace.bonusStats}/>
         );

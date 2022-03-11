@@ -35,7 +35,7 @@ const serviceSlice = createSlice({
             };
         },
         dataCleared(state) {
-            state.data = [];
+            return state = initialState;
         }
     }
 });

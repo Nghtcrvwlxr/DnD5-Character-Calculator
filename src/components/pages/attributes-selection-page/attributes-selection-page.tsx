@@ -9,6 +9,7 @@ import {useTypedDispatch, useTypedSelector} from "../../../store/utils";
 import {dataCleared} from "../../../store/slices/service-slice";
 import {getNextPage, updateCurrentPage} from "../../../store/slices/navigation-slice";
 import {hideInformation, setAttributes} from "../../../store/slices/calculator-slice";
+import {clearAttributes} from "../../../store/slices/attributes-slice";
 
 import {AttributesListContainer} from "../../attributes-list/attributes-list-container";
 import {InformationSheet} from "../../information-sheet/information-sheet";
@@ -32,6 +33,7 @@ export const AttributesSelectionPage: FC = () => {
         return () => {
             dispatch(dataCleared());
             dispatch(hideInformation());
+            dispatch(clearAttributes());
         };
     }, [fetchData, dispatch, url]);
 

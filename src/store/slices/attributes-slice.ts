@@ -2,6 +2,8 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Attribute} from "../../utils/types";
 
 interface AttributesState {
+    loading: boolean,
+    error: boolean | null,
     initialData: Attribute[];
     initialRemainingPoints: number;
     data: Attribute[];
@@ -11,11 +13,13 @@ interface AttributesState {
 }
 
 const initialState: AttributesState = {
+    loading: true,
+    error: null,
     initialData: [],
     initialRemainingPoints: 27,
     data: [],
+    remainingPoints: 0,
     level: 1,
-    remainingPoints: 27,
     currentField: '',
 };
 
@@ -23,10 +27,19 @@ const attributesSlice = createSlice({
     name: 'attributesReducer',
     initialState,
     reducers: {
-        loadData(state, action: PayloadAction<Attribute[]>) {
-            state.data = action.payload;
+        attributesRequested(state) {
+            return state = initialState;
+        },
+        attributesLoaded(state, action: PayloadAction<Attribute[]>) {
+            state.loading = false;
             state.initialData = action.payload;
+            state.data = action.payload;
             state.level = 1;
+        },
+        attributesError(state) {
+            state.data = [];
+            state.loading = false;
+            state.error = true;
         },
         toggleLevel(state, action: PayloadAction<string>) {
             if (action.payload === 'inc' && state.level < 20) {
@@ -68,7 +81,7 @@ const attributesSlice = createSlice({
         addAttribute(state, action: PayloadAction<string>) {
             const index = state.data.findIndex(item => item.index === action.payload);
             const pointCost = Math.floor((state.data[index].value + 1) / 7);
-            if (state.remainingPoints && state.data[index].value < 15) {
+            if (state.remainingPoints >= pointCost && state.data[index].value < 15) {
                 state.data[index].value = state.data[index].value + 1;
                 state.remainingPoints = state.remainingPoints - pointCost;
                 state.data[index].modifier = Math.floor((state.data[index].value / 2) - 5);
@@ -85,18 +98,24 @@ const attributesSlice = createSlice({
         },
         selectField(state, action: PayloadAction<string>) {
             state.currentField = action.payload;
-        }
+        },
+        clearAttributes(state) {
+            return state = initialState;
+        },
     }
 });
 
 export const {reducer: attributesReducer} = attributesSlice;
 
 export const {
-    loadData,
+    attributesRequested,
+    attributesLoaded,
+    attributesError,
     toggleLevel,
     calculateRemainingPoints,
     calculateBonusPoints,
     addAttribute,
     removeAttribute,
-    selectField
+    selectField,
+    clearAttributes
 } = attributesSlice.actions;

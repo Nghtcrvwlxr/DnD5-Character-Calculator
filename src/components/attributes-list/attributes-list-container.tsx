@@ -9,7 +9,7 @@ import {LoadingIndicator} from "../loading-indicator/loading-indicator";
 import {ErrorIndicator} from "../error-indicator/error-indicator";
 
 export const AttributesListContainer: FC = () => {
-    const state = useTypedSelector(state => state.serviceReducer);
+    const state = useTypedSelector(state => state.attributesReducer);
     const showInfo = useTypedSelector(state => state.calculatorReducer.showInfo);
 
     if (state.loading) {
