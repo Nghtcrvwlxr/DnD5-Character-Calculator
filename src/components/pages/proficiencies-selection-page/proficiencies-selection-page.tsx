@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from "react";
+import React, {FC, useContext, useEffect} from "react";
 import {Link} from "react-router-dom";
 
 import styled from "styled-components";
@@ -7,7 +7,9 @@ import {useTypedDispatch, useTypedSelector} from "../../../store/utils";
 import {dataCleared} from "../../../store/slices/service-slice";
 import {getNextPage, updateCurrentPage} from "../../../store/slices/navigation-slice";
 
-import {ProficienciesList} from "../../proficiencies-lists/proficiencies-list";
+import {Service} from "../../service-context/service-context";
+
+import {ProficienciesListContainer} from "../../proficiencies-lists/proficiencies-list-container";
 
 export const ProficienciesSelectionPage: FC = () => {
     const dispatch = useTypedDispatch();
@@ -15,30 +17,27 @@ export const ProficienciesSelectionPage: FC = () => {
 
     const url = window.location.pathname;
 
+    const service = useContext(Service);
+
     useEffect(() => {
         dispatch(updateCurrentPage(url));
         dispatch(getNextPage(url));
+        service.fetchSkills(dispatch);
+        service.fetchTools(dispatch);
+        service.fetchLanguages(dispatch);
         return () => {
             dispatch(dataCleared());
         };
-    }, [dispatch, url]);
-
-    const testData = [
-        {index: '1', label: 'Test'},
-        {index: '2', label: 'Test'},
-        {index: '3', label: 'Test'},
-    ];
+    }, [service, dispatch, url]);
 
     return (
         <>
             <Subtitle>Proficiencies</Subtitle>
 
             <Wrapper>
-                <ProficienciesList label={'Skills'} data={testData}/>
-                <ProficienciesList label={'Languages'} data={testData}/>
-                <ProficienciesList label={'Tools'} data={testData}/>
-                <ProficienciesList label={'Weapons'} data={testData}/>
-                <ProficienciesList label={'Armor'} data={testData}/>
+                <ProficienciesListContainer label={'Skills'}/>
+                <ProficienciesListContainer label={'Tools'}/>
+                <ProficienciesListContainer label={'Languages'}/>
             </Wrapper>
 
             <ButtonsWrapper>
@@ -61,7 +60,7 @@ const Wrapper = styled.div`
   justify-content: center;
   display: grid;
   padding: 0 50px;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 `;
 
 const ButtonsWrapper = styled.div`

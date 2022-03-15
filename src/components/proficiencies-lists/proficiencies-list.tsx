@@ -4,22 +4,26 @@ import styled from "styled-components";
 
 import {ProficienciesListItem} from "../proficiencies-list-item/proficiencies-list-item";
 
+import {Skill, Tool, Language} from "../../utils/types";
+
+type Data = Skill[] | Tool[] | Language[];
+
 interface ProficienciesListProps {
     label: string;
-    data: any[];
+    data: Data;
 }
 
 export const ProficienciesList: FC<ProficienciesListProps> = (props) => {
     const elements = props.data.map(item => {
         return (
-            <ProficienciesListItem key={item.index} label={item.label}/>
+            <ProficienciesListItem key={item.index} name={item.name}/>
         );
     });
 
     return (
         <List>
             <Subtitle>{props.label}</Subtitle>
-
+            <Span>2 remaining</Span>
             <ItemsWrapper>
                 {elements}
             </ItemsWrapper>
@@ -39,8 +43,18 @@ const Subtitle = styled.h3`
   color: white;
 `;
 
+const Span = styled.span`
+  margin-bottom: 10px;
+  display: block;
+  text-align: center;
+  color: white;
+`;
+
 const ItemsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: start;
+  padding: 20px;
+  background: rgba(255, 255, 255, .3);
+  height: 90%;
 `;

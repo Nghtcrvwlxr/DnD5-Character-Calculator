@@ -20,3 +20,18 @@ export interface Attribute extends Record<string, any> {
     value: number;
     modifier: number;
 }
+
+export interface Skill extends Record<string, any> {
+    index: string;
+    name: string;
+}
+
+export interface Tool extends Record<string, any> {
+    index: string;
+    name: string;
+}
+
+export interface Language extends Record<string, any> {
+    index: string;
+    name: string;
+}
