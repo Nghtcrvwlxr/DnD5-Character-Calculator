@@ -8,30 +8,29 @@ import {LoadingIndicator} from "../loading-indicator/loading-indicator";
 import {ErrorIndicator} from "../error-indicator/error-indicator";
 import {ProficienciesList} from "./proficiencies-list";
 
-interface ProficienciesListProps {
+interface ProficienciesListContainerProps {
     label: string;
 }
 
-export const ProficienciesListContainer: FC<ProficienciesListProps> = (props) => {
-    const state = useTypedSelector(state => state.proficienciesReducer);
+export const ProficienciesListContainer: FC<ProficienciesListContainerProps> = (props) => {
+    const dataIndex = props.label.toLowerCase();
+    const state = useTypedSelector(state => state.proficienciesReducer[dataIndex]);
 
-    const field = props.label.toLowerCase();
-
-    if (state[field].loading) {
+    if (state.loading) {
         return (
             <LoadingWrapper>
                 <LoadingIndicator/>
             </LoadingWrapper>
         );
     }
-    if (state[field].error) {
+    if (state.error) {
         return (
             <ErrorWrapper>
                 <ErrorIndicator/>
             </ErrorWrapper>
         );
     }
-    return <ProficienciesList label={props.label} data={state[field].data}/>
+    return <ProficienciesList label={props.label} data={state.data}/>
 };
 
 const LoadingWrapper = styled.div`

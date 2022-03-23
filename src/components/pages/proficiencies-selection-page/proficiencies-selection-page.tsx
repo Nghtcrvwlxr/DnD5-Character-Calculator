@@ -3,21 +3,20 @@ import {Link} from "react-router-dom";
 
 import styled from "styled-components";
 
-import {useTypedDispatch, useTypedSelector} from "../../../store/utils";
-import {dataCleared} from "../../../store/slices/service-slice";
-import {getNextPage, updateCurrentPage} from "../../../store/slices/navigation-slice";
-
 import {Service} from "../../service-context/service-context";
+
+import {useTypedDispatch, useTypedSelector} from "../../../store/utils";
+import {proficienciesCleared} from "../../../store/slices/proficiencies-slice";
+import {getNextPage, updateCurrentPage} from "../../../store/slices/navigation-slice";
 
 import {ProficienciesListContainer} from "../../proficiencies-lists/proficiencies-list-container";
 
 export const ProficienciesSelectionPage: FC = () => {
     const dispatch = useTypedDispatch();
     const nextPageURL = useTypedSelector(state => state.navigationReducer.nextPage);
+    const service = useContext(Service);
 
     const url = window.location.pathname;
-
-    const service = useContext(Service);
 
     useEffect(() => {
         dispatch(updateCurrentPage(url));
@@ -26,7 +25,7 @@ export const ProficienciesSelectionPage: FC = () => {
         service.fetchTools(dispatch);
         service.fetchLanguages(dispatch);
         return () => {
-            dispatch(dataCleared());
+            dispatch(proficienciesCleared());
         };
     }, [service, dispatch, url]);
 
@@ -56,8 +55,6 @@ const Subtitle = styled.h2`
 `;
 
 const Wrapper = styled.div`
-  position: relative;
-  justify-content: center;
   display: grid;
   padding: 0 50px;
   grid-template-columns: repeat(3, 1fr);

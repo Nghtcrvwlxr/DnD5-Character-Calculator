@@ -2,16 +2,19 @@ export interface Race extends Record<string, any> {
     index: string;
     name: string;
     bonusStats: Record<string, number>;
+    proficiencies: Record<string, any>;
 }
 
 export interface Class extends Record<string, any> {
     index: string;
     name: string;
+    proficiencies: Record<string, any>;
 }
 
 export interface Background extends Record<string, any> {
     index: string;
     name: string;
+    proficiencies: Record<string, any>;
 }
 
 export interface Attribute extends Record<string, any> {

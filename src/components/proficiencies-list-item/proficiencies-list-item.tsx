@@ -4,20 +4,22 @@ import styled from "styled-components";
 
 interface ProficienciesListItemProps {
     name: string;
+    setVisibleItems: Function;
 }
 
 export const ProficienciesListItem: FC<ProficienciesListItemProps> = (props) => {
     return (
-        <ListItem>
+        <ListItem onClick={() => props.setVisibleItems()}>
             <Span>{props.name}</Span>
             <Indicator/>
         </ListItem>
     );
 };
 
-const ListItem = styled.div`
+const ListItem = styled.li`
   box-sizing: border-box;
   padding: 5px 15px;
+  margin-bottom: 3px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -28,8 +30,8 @@ const ListItem = styled.div`
 `;
 
 const Span = styled.span`
-  font-size: 18px;
-  line-height: 18px;
+  font-size: 14px;
+  line-height: 14px;
   color: white;
 `;
 

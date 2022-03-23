@@ -53,6 +53,9 @@ const proficienciesSlice = createSlice({
             state[action.payload].error = true;
             state[action.payload].data = [];
         },
+        proficienciesCleared(state) {
+            return state = initialState;
+        },
     }
 });
 
@@ -62,4 +65,5 @@ export const {
     proficienciesRequested,
     proficienciesLoaded,
     proficienciesError,
+    proficienciesCleared,
 } = proficienciesSlice.actions;

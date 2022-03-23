@@ -11,46 +11,253 @@ export default class TestService {
             "index": "dragonborn",
             "name": "Dragonborn",
             "bonusStats": {str: 2, chr: 1},
+            "proficiencies": {
+                "skills": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": ["common", "draconic"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "dwarf",
             "name": "Dwarf",
             "bonusStats": {con: 2},
+            "proficiencies": {
+                "skills": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "tools": {
+                    "preselected": ["craftsmen's-tools"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": ["common", "dwarvish"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "elf",
             "name": "Elf",
             "bonusStats": {dex: 2},
+            "proficiencies": {
+                "skills": {
+                    "preselected": ["perception"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": ["common", "elvish"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "gnome",
             "name": "Gnome",
             "bonusStats": {int: 2},
+            "proficiencies": {
+                "skills": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "tools": {
+                    "preselected": ["craftsmen's-tools"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": ["common", "gnomish"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "half-elf",
             "name": "Half-Elf",
             "bonusStats": {chr: 2, unset: 2},
+            "proficiencies": {
+                "skills": {
+                    "preselected": [],
+                    "available": {
+                        count: 2,
+                        items: ["all"],
+                    },
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": ["common", "elvish"],
+                    "available": {
+                        count: 1,
+                        items: ["all"],
+                    },
+                },
+            },
         },
         {
             "index": "half-orc",
             "name": "Half-Orc",
             "bonusStats": {str: 2, con: 1},
+            "proficiencies": {
+                "skills": {
+                    "preselected": ["intimidation"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": ["common", "orc"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "halfling",
             "name": "Halfling",
             "bonusStats": {dex: 2},
+            "proficiencies": {
+                "skills": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": ["common", "halfling"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "human",
             "name": "Human",
             "bonusStats": {str: 1, dex: 1, con: 1, int: 1, wis: 1, chr: 1},
+            "proficiencies": {
+                "skills": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    }
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    }
+                },
+                "languages": {
+                    "preselected": ["common"],
+                    "available": {
+                        count: 1,
+                        items: ["all"],
+                    },
+                },
+            },
         },
         {
             "index": "tiefling",
             "name": "Tiefling",
             "bonusStats": {chr: 2, int: 1},
+            "proficiencies": {
+                "skills": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": ["common", "infernal"],
+                    "available": {
+                        count: 1,
+                        items: ["all"],
+                    },
+                },
+            },
         }
     ];
 
@@ -58,50 +265,326 @@ export default class TestService {
         {
             "index": "barbarian",
             "name": "Barbarian",
+            "proficiencies": {
+                "skills": {
+                    "preselected": [],
+                    "available": {
+                        count: 2,
+                        items: ["athletics", "perception", "survival", "intimidation", "nature", "animal-handling"],
+                    },
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "bard",
             "name": "Bard",
+            "proficiencies": {
+                "skills": {
+                    "preselected": [],
+                    "available": {
+                        count: 3,
+                        items: ["all"],
+                    },
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 3,
+                        items: ["musical-instruments"],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "cleric",
             "name": "Cleric",
+            "proficiencies": {
+                "skills": {
+                    "preselected": [],
+                    "available": {
+                        count: 2,
+                        items: ["history", "medicine", "insight", "investigation", "religion"],
+                    },
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "druid",
             "name": "Druid",
+            "proficiencies": {
+                "skills": {
+                    "preselected": [],
+                    "available": {
+                        count: 2,
+                        items: ["perception", "survival", "arcana", "medicine", "animal-handling", "nature", "insight", "religion"],
+                    },
+                },
+                "tools": {
+                    "preselected": ["herbalist's-set"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "fighter",
             "name": "Fighter",
+            "proficiencies": {
+                "skills": {
+                    "preselected": [],
+                    "available": {
+                        count: 2,
+                        items: ["acrobatics", "athletics", "perception", "survival", "intimidation", "history", "insight", "animal-handling"],
+                    },
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "monk",
             "name": "Monk",
+            "proficiencies": {
+                "skills": {
+                    "preselected": [],
+                    "available": {
+                        count: 2,
+                        items: ["acrobatics", "athletics", "history", "insight", "religion", "stealth"],
+                    },
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 1,
+                        items: ["craftsmen's-tools", "musical-instruments"],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "paladin",
             "name": "Paladin",
+            "proficiencies": {
+                "skills": {
+                    "preselected": [],
+                    "available": {
+                        count: 2,
+                        items: ["athletics", "intimidation", "medicine", "insight", "religion", "persuasion"],
+                    },
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "ranger",
             "name": "Ranger",
+            "proficiencies": {
+                "skills": {
+                    "preselected": [],
+                    "available": {
+                        count: 3,
+                        items: ["athletics", "perception", "survival", "nature", "insight", "investigation", "stealth", "animal-handling"],
+                    },
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "rogue",
             "name": "Rogue",
+            "proficiencies": {
+                "skills": {
+                    "preselected": [],
+                    "available": {
+                        count: 4,
+                        items: ["acrobatics", "athletics", "perception", "performance", "intimidation", "sleight-of-hand", "deception", "insight", "investigation", "stealth", "persuasion"],
+                    },
+                },
+                "tools": {
+                    "preselected": ["thieves'-tools"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "sorcerer",
             "name": "Sorcerer",
+            "proficiencies": {
+                "skills": {
+                    "preselected": [],
+                    "available": {
+                        count: 2,
+                        items: ["intimidation", "arcana", "deception", "insight", "religion", "persuasion"],
+                    },
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "warlock",
             "name": "Warlock",
+            "proficiencies": {
+                "skills": {
+                    "preselected": [],
+                    "available": {
+                        count: 2,
+                        items: ["intimidation", "history", "arcana", "deception", "nature", "investigation", "religion"],
+                    },
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "wizard",
             "name": "Wizard",
+            "proficiencies": {
+                "skills": {
+                    "preselected": [],
+                    "available": {
+                        count: 2,
+                        items: ["history", "arcana", "medicine", "insight", "investigation", "religion"],
+                    },
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         }
     ];
 
@@ -109,50 +592,326 @@ export default class TestService {
         {
             "index": "charlatan",
             "name": "Charlatan",
+            "proficiencies": {
+                "skills": {
+                    "preselected": ["sleight-of-hand", "deception"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "tools": {
+                    "preselected": ["makeup-kit", "falsification-kit"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "criminal",
             "name": "Criminal",
+            "proficiencies": {
+                "skills": {
+                    "preselected": ["deception", "stealth"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "tools": {
+                    "preselected": ["thieves'-tools"],
+                    "available": {
+                        count: 1,
+                        items: ["game-sets"],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "entertainer",
             "name": "Entertainer",
+            "proficiencies": {
+                "skills": {
+                    "preselected": ["acrobatics", "performance"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "tools": {
+                    "preselected": ["makeup-kit"],
+                    "available": {
+                        count: 1,
+                        items: ["musical-instruments"],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "folk hero",
             "name": "Folk hero",
+            "proficiencies": {
+                "skills": {
+                    "preselected": ["survival", "animal-handling"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 1,
+                        items: ["craftsmen's-tools", "herbalist's-set", "falsification-kit"],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "guild artisan",
             "name": "Guild artisan",
+            "proficiencies": {
+                "skills": {
+                    "preselected": ["insight", "persuasion"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 1,
+                        items: ["craftsmen's-tools", "herbalist's-set", "falsification-kit"],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 1,
+                        items: ["all"],
+                    },
+                },
+            },
         },
         {
             "index": "hermit",
             "name": "Hermit",
+            "proficiencies": {
+                "skills": {
+                    "preselected": ["medicine", "religion"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "tools": {
+                    "preselected": ["herbalist's-set"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 1,
+                        items: ["all"],
+                    },
+                },
+            },
         },
         {
             "index": "outlander",
             "name": "Outlander",
+            "proficiencies": {
+                "skills": {
+                    "preselected": ["athletics", "survival"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 1,
+                        items: ["musical-instruments"],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 1,
+                        items: ["all"],
+                    },
+                },
+            },
         },
         {
             "index": "noble",
             "name": "Noble",
+            "proficiencies": {
+                "skills": {
+                    "preselected": ["history", "persuasion"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 1,
+                        items: ["game-sets"],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 1,
+                        items: ["all"],
+                    },
+                },
+            },
         },
         {
             "index": "sage",
             "name": "Sage",
+            "proficiencies": {
+                "skills": {
+                    "preselected": ["history", "arcana"],
+                    "available": {
+                        count: 2,
+                        items: ["all"],
+                    },
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "sailor",
             "name": "Sailor",
+            "proficiencies": {
+                "skills": {
+                    "preselected": ["athletics", "perception"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "tools": {
+                    "preselected": ["navigator's-tools"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "soldier",
             "name": "Soldier",
+            "proficiencies": {
+                "skills": {
+                    "preselected": ["athletics", "intimidation"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "tools": {
+                    "preselected": [],
+                    "available": {
+                        count: 1,
+                        items: ["game-sets"],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         },
         {
             "index": "urchin",
             "name": "Urchin",
+            "proficiencies": {
+                "skills": {
+                    "preselected": ["sleight-of-hand", "stealth"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "tools": {
+                    "preselected": ["thieves'-tools", "makeup-kit"],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+                "languages": {
+                    "preselected": [],
+                    "available": {
+                        count: 0,
+                        items: [],
+                    },
+                },
+            },
         }
     ];
 
